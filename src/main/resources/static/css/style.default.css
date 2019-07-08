@@ -440,11 +440,11 @@ nav.side-navbar .sidebar-header {
 
 nav.side-navbar .avatar {
   width: 55px;
-  height: 55px;
+  height: 55px
 }
 
 nav.side-navbar .title {
-  margin-left: 10px;
+  text-align: right;
 }
 
 nav.side-navbar .title h1 {

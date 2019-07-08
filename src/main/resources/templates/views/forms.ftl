@@ -124,24 +124,60 @@
           </div>
           <!-- Sidebar Navidation Menus--><span class="heading">Main</span>
           <ul class="list-unstyled">
-                    <li><a href="javascript:void(0);" onclick="index('${Session["userInfo"].userName}','${Session["userInfo"].password}');"> <i class="icon-home"></i>Home </a></li>
-                    <li><a href="/tables"> <i class="icon-grid"></i>Tables </a></li>
-                    <li><a href="/charts"> <i class="fa fa-bar-chart"></i>Charts </a></li>
-                    <li class="active"><a href="/forms"> <i class="icon-padnote"></i>Forms </a></li>
-                    <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Example dropdown </a>
-                      <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
-                        <li><a href="#">Page</a></li>
-                        <li><a href="#">Page</a></li>
-                        <li><a href="#">Page</a></li>
-                      </ul>
-                    </li>
-                    <li><a href="/login"> <i class="icon-interface-windows"></i>Login page </a></li>
-          </ul><span class="heading">Extras</span>
-          <ul class="list-unstyled">
-            <li> <a href="#"> <i class="icon-flask"></i>Demo </a></li>
-            <li> <a href="#"> <i class="icon-screen"></i>Demo </a></li>
-            <li> <a href="#"> <i class="icon-mail"></i>Demo </a></li>
-            <li> <a href="#"> <i class="icon-picture"></i>Demo </a></li>
+            <li class="active"><a href="#"> <i class="icon-home"></i>Home </a></li>
+            <li><a href="#tables" aria-expanded="false" data-toggle="collapse"> <i
+                        class="icon-interface-windows"></i>进货管理</a>
+              <ul id="tables" class="collapse list-unstyled ">
+                <li><a href="#">进货单</a></li>
+                <li><a href="#">进货退货</a></li>
+              </ul>
+            </li>
+            <li><a href="#sale" aria-expanded="false" data-toggle="collapse"> <i
+                        class="icon-interface-windows"></i>销售管理</a>
+              <ul id="sale" class="collapse list-unstyled ">
+                <li><a href="#">销售单</a></li>
+                <li><a href="#">销售退货</a></li>
+              </ul>
+            </li>
+            <li><a href="#stock" aria-expanded="false" data-toggle="collapse"> <i
+                        class="icon-interface-windows"></i>库存管理</a>
+              <ul id="stock" class="collapse list-unstyled ">
+                <li><a href="#">库存盘点</a></li>
+                <li><a href="#">价格调整</a></li>
+              </ul>
+            </li>
+            <li><a href="#infosearch" aria-expanded="false" data-toggle="collapse"> <i
+                        class="icon-interface-windows"></i>信息查询</a>
+              <ul id="infosearch" class="collapse list-unstyled ">
+                <li><a href="#">销售查询</a></li>
+                <li><a href="#">商品查询</a></li>
+                <li><a href="#">销售排行</a></li>
+              </ul>
+            </li>
+            <li><a href="#basicinfomation" aria-expanded="false" data-toggle="collapse"> <i
+                        class="icon-interface-windows"></i>资料管理</a>
+              <ul id="basicinfomation" class="collapse list-unstyled ">
+                <li><a href="#">商品资料管理</a></li>
+                <li><a href="#">客户资料管理</a></li>
+                <li><a href="#">供应商管理</a></li>
+                <li><a href="#">经手人管理</a></li>
+              </ul>
+            </li>
+            <li><a href="#systemprotect" aria-expanded="false" data-toggle="collapse"> <i
+                        class="icon-interface-windows"></i>系统维护</a>
+              <ul id="systemprotect" class="collapse list-unstyled ">
+                <li><a href="#">数据备份和恢复</a></li>
+                <li><a href="#">修改密码</a></li>
+                <li><a href="#">退出系统</a></li>
+              </ul>
+            </li>
+            <li><a href="#help" aria-expanded="false" data-toggle="collapse"> <i
+                        class="icon-interface-windows"></i>帮助</a>
+              <ul id="help" class="collapse list-unstyled ">
+                <li><a href="#">关于</a></li>
+                <li><a href="#">联系技术支持</a></li>
+              </ul>
+            </li>
           </ul>
         </nav>
         <div class="content-inner">
