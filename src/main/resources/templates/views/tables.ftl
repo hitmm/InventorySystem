@@ -23,7 +23,6 @@
     <link rel="shortcut icon" href="/static/img/favicon.ico">
     <!-- Tweaks for older IEs--><!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="/static/js/post.js"/>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
   </head>
   <body>
@@ -119,13 +118,13 @@
           <div class="sidebar-header d-flex align-items-center">
             <div class="avatar"><img src="/static/img/avatar-1.jpg" alt="..." class="/static/img-fluid rounded-circle"></div>
             <div class="title">
-              <h1 class="h4">Mark Stephen</h1>
+              <h1 class="h4">${Session["userInfo"].userName}</h1>
               <p>Web Designer</p>
             </div>
           </div>
           <!-- Sidebar Navidation Menus--><span class="heading">Main</span>
           <ul class="list-unstyled">
-                    <li><a href = "javascript:index(${userInfo.userName},${userInfo.password});"> <i class="icon-home"></i>Home </a></li>
+                    <li><a href="javascript:void(0)" onclick="post('/index','${Session["userInfo"].userName}','${Session["userInfo"].password}');"> <i class="icon-home"></i>Home </a></li>
                     <li class="active"><a href="/tables"> <i class="icon-grid"></i>Tables </a></li>
                     <li><a href="/charts"> <i class="fa fa-bar-chart"></i>Charts </a></li>
                     <li><a href="/forms"> <i class="icon-padnote"></i>Forms </a></li>
@@ -397,5 +396,6 @@
     <script src="/static/vendor/jquery-validation/jquery.validate.min.js"></script>
     <!-- Main File-->
     <script src="/static/js/front.js"></script>
+    <script src="/static/js/post.js"></script>
   </body>
 </html>

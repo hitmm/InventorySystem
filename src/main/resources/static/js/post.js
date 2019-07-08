@@ -1,4 +1,4 @@
-function index(userName, password) {
+function post(url,userName, password) {
     var temp = document.createElement("form"); //创建form表单
     temp.action = url;
     temp.method = "post";
