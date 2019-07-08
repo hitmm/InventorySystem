@@ -18,7 +18,7 @@ SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
 CREATE DATABASE inventory;
-user inventory;
+use inventory;
 
 -- ----------------------------
 -- Table structure for tb_jsr
