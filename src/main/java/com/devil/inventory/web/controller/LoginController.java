@@ -39,7 +39,7 @@ public class LoginController {
         return "views/login";
     }
 
-    @RequestMapping(value = "/index")
+    @RequestMapping(value = "/index",method=RequestMethod.POST)
     public ModelAndView onLogin(@RequestParam(name = "userName", required = true)  String userName,
                                 @RequestParam(name = "password", required = true)String password,
                                 HttpServletRequest request) throws Exception {

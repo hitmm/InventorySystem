@@ -124,7 +124,7 @@
           </div>
           <!-- Sidebar Navidation Menus--><span class="heading">Main</span>
           <ul class="list-unstyled">
-                    <li><a href="/index"> <i class="icon-home"></i>Home </a></li>
+                    <li><a href="javascript:void(0);" onclick="index('${Session["userInfo"].userName}','${Session["userInfo"].password}');"> <i class="icon-home"></i>Home </a></li>
                     <li><a href="/tables"> <i class="icon-grid"></i>Tables </a></li>
                     <li class="active"><a href="/charts"> <i class="fa fa-bar-chart"></i>Charts </a></li>
                     <li><a href="/forms"> <i class="icon-padnote"></i>Forms </a></li>
@@ -348,5 +348,6 @@
     <script src="/static/js/charts-custom.js"></script>
     <!-- Main File-->
     <script src="/static/js/front.js"></script>
+    <script src="/static/js/post.js"></script>
   </body>
 </html>

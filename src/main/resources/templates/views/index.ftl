@@ -126,7 +126,7 @@
           </div>
           <!-- Sidebar Navidation Menus--><span class="heading">Main</span>
           <ul class="list-unstyled">
-                    <li class="active"><a href = "javascript:void(0)" th:onclick=""> <i class="icon-home"></i>Home </a></li>
+                    <li class="active"><a href = "#"> <i class="icon-home"></i>Home </a></li>
                     <li><a href="/tables"> <i class="icon-grid"></i>Tables </a></li>
                     <li><a href="/charts"> <i class="fa fa-bar-chart"></i>Charts </a></li>
                     <li><a href="/forms"> <i class="icon-padnote"></i>Forms </a></li>
