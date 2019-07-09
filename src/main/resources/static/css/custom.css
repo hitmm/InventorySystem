@@ -1,9 +1,9 @@
 /* your styles go here */
 .headportrait {
-    width: 120px;
-    height: 120px;
+    width: 100px;
+    height: 100px;
     display: block;
-    background-size: 120px auto;
+    background-size: 100px auto;
 }
 
 .title1{
