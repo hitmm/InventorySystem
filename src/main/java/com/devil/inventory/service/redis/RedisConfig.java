@@ -22,12 +22,12 @@ public class RedisConfig {
     private String singleNodes;
 
     @Bean
-    public Jedis getJedisClient(){
+    public Jedis getJedisClient() {
         //分割集群节点
         String[] hostPort = singleNodes.split(":");
         //创建set集合对象
-        Set<HostAndPort> nodes =new HashSet<>();
-        HostAndPort hostAndPort = new HostAndPort(hostPort[0],Integer.parseInt(hostPort[1]));
+        Set<HostAndPort> nodes = new HashSet<>();
+        HostAndPort hostAndPort = new HostAndPort(hostPort[0], Integer.parseInt(hostPort[1]));
         Jedis jedis = new Jedis(hostAndPort);
         return jedis;
     }

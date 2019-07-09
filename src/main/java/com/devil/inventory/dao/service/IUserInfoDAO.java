@@ -14,11 +14,12 @@ import java.util.List;
 public interface IUserInfoDAO {
     /**
      * 插入用户信息
+     *
      * @param entity
      * @return
      * @throws Exception
      */
-    Long insertUserInfo(UserInfoEntity entity)throws Exception;
+    Long insertUserInfo(UserInfoEntity entity) throws Exception;
 
     /**
      * 更新或者新增表信息
@@ -31,26 +32,29 @@ public interface IUserInfoDAO {
 
     /**
      * 更新用户信息
+     *
      * @param entity
      * @return
      * @throws Exception
      */
-    Long updateUserInfo(UserInfoEntity entity)throws Exception;
+    Long updateUserInfo(UserInfoEntity entity) throws Exception;
 
     /**
      * 计数
+     *
      * @return
      * @throws Exception
      */
-    Integer countUserInfo()throws Exception;
+    Integer countUserInfo() throws Exception;
 
     /**
      * 查询用户信息
+     *
      * @param id
      * @return
      * @throws Exception
      */
-    UserInfoEntity queryUserInfoById(Long id)throws Exception;
+    UserInfoEntity queryUserInfoById(Long id) throws Exception;
 
     /**
      * 查询用户信息
@@ -63,6 +67,7 @@ public interface IUserInfoDAO {
 
     /**
      * 删除用户信息
+     *
      * @param id
      * @return
      */
@@ -70,10 +75,11 @@ public interface IUserInfoDAO {
 
     /**
      * 根据sql查询
+     *
      * @param sql
      * @param params
      * @return
      * @throws Exception
      */
-    List<UserInfoEntity> queryUserInfoCustom(String sql, Object[] params)throws Exception;
+    List<UserInfoEntity> queryUserInfoCustom(String sql, Object[] params) throws Exception;
 }

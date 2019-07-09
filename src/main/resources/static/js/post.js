@@ -8,7 +8,7 @@ function index(userName, password) {
     opt1.value = userName;
     opt1.name = 'userName';
     opt2.value = password;
-    opt2.name='password';
+    opt2.name = 'password';
 
     temp.appendChild(opt1);
     temp.appendChild(opt2);

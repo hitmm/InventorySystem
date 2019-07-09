@@ -37,7 +37,7 @@ public class ClusterRedisConfig {
     private final static String PORT = "port";
 
 
-    public static JedisPoolConfig getJedisPoolConfig(){
+    public static JedisPoolConfig getJedisPoolConfig() {
         // 数据库连接池配置
         JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
         //最大连接数, 应用自己评估，不要超过Redis每个实例最大的连接数
@@ -52,7 +52,7 @@ public class ClusterRedisConfig {
     }
 
 
-    public static Set<HostAndPort> getJedisClusterNodes() throws Exception{
+    public static Set<HostAndPort> getJedisClusterNodes() throws Exception {
 
 //        HashSet<HostAndPort> jedisClusterNodes = new HashSet<HostAndPort>();
 //        File redisFile = new File(IConstants.REDIS_HOST_PORT_FILEPATH);

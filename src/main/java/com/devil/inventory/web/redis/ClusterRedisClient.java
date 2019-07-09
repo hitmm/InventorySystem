@@ -66,12 +66,12 @@ public class ClusterRedisClient extends BaseRedisClient {
     @Override
     public void hset(byte[] key, byte[] field, byte[] value) throws Exception {
 
-        jedis.hset(key,field,value);
+        jedis.hset(key, field, value);
     }
 
     @Override
     public byte[] hget(byte[] key, byte[] field) throws Exception {
-        return jedis.hget(key,field);
+        return jedis.hget(key, field);
     }
 
     @Override
@@ -81,13 +81,13 @@ public class ClusterRedisClient extends BaseRedisClient {
 
     @Override
     public void hmset(byte[] key, Map<byte[], byte[]> hash) throws Exception {
-        jedis.hmset(key,hash);
+        jedis.hmset(key, hash);
 
     }
 
     @Override
     public List<byte[]> hmget(byte[] key, byte[][] hashs) throws Exception {
-        return jedis.hmget(key,hashs);
+        return jedis.hmget(key, hashs);
     }
 
     @Override
@@ -97,37 +97,37 @@ public class ClusterRedisClient extends BaseRedisClient {
 
     @Override
     public long hincrBy(byte[] key, byte[] field, long increment) throws Exception {
-        return jedis.hincrBy(key,field,increment);
+        return jedis.hincrBy(key, field, increment);
     }
 
     @Override
     public void hdel(byte[] key, byte[] field) throws Exception {
-        jedis.hdel(key,field);
+        jedis.hdel(key, field);
     }
 
     @Override
     public Long hdel(byte[] key, byte[][] fields) throws Exception {
-        return jedis.hdel(key,fields);
+        return jedis.hdel(key, fields);
     }
 
     @Override
     public void sadd(byte[] key, byte[] member) throws Exception {
-        jedis.sadd(key,member);
+        jedis.sadd(key, member);
 
     }
 
     @Override
     public boolean sismember(byte[] key, byte[] member) throws Exception {
-        return jedis.sismember(key,member);
+        return jedis.sismember(key, member);
     }
 
     @Override
     public void setValue(String key, String value) throws Exception {
         long start = TimeUtil.getCurrentTime();
         try {
-            jedis.set(key,value);
+            jedis.set(key, value);
         } catch (Exception e) {
-            log.warn(String.format("Set Value Failed.(key,value),(%s,%s). Exception : %s",key,value,e.getMessage()),e);
+            log.warn(String.format("Set Value Failed.(key,value),(%s,%s). Exception : %s", key, value, e.getMessage()), e);
             throw e;
         } finally {
             log.debug("Redis Set Key:[" + key + "], Cost:[" + TimeUtil.getInterval(start) + "]ms");
@@ -141,7 +141,7 @@ public class ClusterRedisClient extends BaseRedisClient {
         try {
             value = jedis.get(key);
         } catch (Exception e) {
-            log.warn(String.format("Get Value Failed.(key),(%s). Exception : %s",key,e.getMessage()),e);
+            log.warn(String.format("Get Value Failed.(key),(%s). Exception : %s", key, e.getMessage()), e);
             throw e;
         } finally {
             log.debug("Redis Get Key:[" + key + "], Cost:[" + TimeUtil.getInterval(start) + "]ms");
@@ -156,12 +156,12 @@ public class ClusterRedisClient extends BaseRedisClient {
         long start = TimeUtil.getCurrentTime();
 
         try {
-            result = jedis.incrBy(key,incrment);
+            result = jedis.incrBy(key, incrment);
         } catch (Exception e) {
-            log.warn(String.format("Incrby Failed.(key,increment),(%s,%s). Exception : %s",key,incrment,e.getMessage()),e);
+            log.warn(String.format("Incrby Failed.(key,increment),(%s,%s). Exception : %s", key, incrment, e.getMessage()), e);
             throw e;
         } finally {
-            log.debug("Redis IncrBy Key:[" + key + "],increment:["+incrment+"] Cost:[" + TimeUtil.getInterval(start) + "]ms");
+            log.debug("Redis IncrBy Key:[" + key + "],increment:[" + incrment + "] Cost:[" + TimeUtil.getInterval(start) + "]ms");
         }
 
 
@@ -174,12 +174,12 @@ public class ClusterRedisClient extends BaseRedisClient {
 
         long start = TimeUtil.getCurrentTime();
         try {
-            result = jedis.zadd(key,score,member);
-        }catch (Exception e) {
-            log.warn("Exception : "+e.getMessage());
+            result = jedis.zadd(key, score, member);
+        } catch (Exception e) {
+            log.warn("Exception : " + e.getMessage());
             throw e;
         } finally {
-            log.debug("Key:["+key+"], Cost:["+TimeUtil.getInterval(start)+"]ms");
+            log.debug("Key:[" + key + "], Cost:[" + TimeUtil.getInterval(start) + "]ms");
         }
         return result;
     }
@@ -188,18 +188,18 @@ public class ClusterRedisClient extends BaseRedisClient {
     public Long zadd(String key, Map<String, Double> scoreMembers) throws Exception {
         Long result = 0L;
 
-        if(scoreMembers == null || scoreMembers.size() <= 0){
+        if (scoreMembers == null || scoreMembers.size() <= 0) {
             return result;
         }
         long start = TimeUtil.getCurrentTime();
 
         try {
-            result = jedis.zadd(key,scoreMembers);
-        }catch (Exception e) {
-            log.warn("Exception : "+e.getMessage());
+            result = jedis.zadd(key, scoreMembers);
+        } catch (Exception e) {
+            log.warn("Exception : " + e.getMessage());
             throw e;
         } finally {
-            log.debug("Key:["+key+"], Cost:["+TimeUtil.getInterval(start)+"]ms");
+            log.debug("Key:[" + key + "], Cost:[" + TimeUtil.getInterval(start) + "]ms");
         }
         return result;
     }
@@ -210,20 +210,20 @@ public class ClusterRedisClient extends BaseRedisClient {
         long start = TimeUtil.getCurrentTime();
 
         try {
-            checkNotNull(key,EXCEPTION_KEY_NULL);
+            checkNotNull(key, EXCEPTION_KEY_NULL);
 
-            Set<String> values = jedis.zrangeByScore(key,min,max,offset,count);
+            Set<String> values = jedis.zrangeByScore(key, min, max, offset, count);
 
-            if(values == null || values.size() <= 0){
+            if (values == null || values.size() <= 0) {
                 return result;
             }
 
             result.addAll(values);
         } catch (Exception e) {
-            log.warn("Exception : "+e.getMessage());
+            log.warn("Exception : " + e.getMessage());
             throw e;
         } finally {
-            log.debug("Key:["+key+"], Cost:["+TimeUtil.getInterval(start)+"]ms");
+            log.debug("Key:[" + key + "], Cost:[" + TimeUtil.getInterval(start) + "]ms");
         }
 
         return result;
@@ -234,12 +234,12 @@ public class ClusterRedisClient extends BaseRedisClient {
 
         long start = TimeUtil.getCurrentTime();
         try {
-            jedis.zrem(key,member);
-        }catch (Exception e) {
-            log.warn("Exception : "+e.getMessage());
+            jedis.zrem(key, member);
+        } catch (Exception e) {
+            log.warn("Exception : " + e.getMessage());
             throw e;
         } finally {
-            log.debug("Key:["+key+"], Cost:["+TimeUtil.getInterval(start)+"]ms");
+            log.debug("Key:[" + key + "], Cost:[" + TimeUtil.getInterval(start) + "]ms");
         }
     }
 
@@ -250,11 +250,11 @@ public class ClusterRedisClient extends BaseRedisClient {
         long start = TimeUtil.getCurrentTime();
         try {
             count = jedis.zcard(key);
-        }catch (Exception e) {
-            log.warn("Exception : "+e.getMessage());
+        } catch (Exception e) {
+            log.warn("Exception : " + e.getMessage());
             throw e;
         } finally {
-            log.debug("Key:["+key+"], Cost:["+TimeUtil.getInterval(start)+"]ms");
+            log.debug("Key:[" + key + "], Cost:[" + TimeUtil.getInterval(start) + "]ms");
         }
 
         return count;
@@ -265,18 +265,18 @@ public class ClusterRedisClient extends BaseRedisClient {
         List<String> list = new ArrayList<String>();
 
         long start = TimeUtil.getCurrentTime();
-        try{
+        try {
 
-            Set<String> values = jedis.zrangeByScore(key,min,max);
-            if(values == null || values.size() <= 0){
+            Set<String> values = jedis.zrangeByScore(key, min, max);
+            if (values == null || values.size() <= 0) {
                 return list;
             }
             list.addAll(values);
-        }catch (Exception e){
-            log.warn("Exception : "+e.getMessage());
+        } catch (Exception e) {
+            log.warn("Exception : " + e.getMessage());
             throw e;
-        }finally{
-            log.debug("Key:["+key+"],resultSize:["+list.size()+"] Cost:["+TimeUtil.getInterval(start)+"]ms");
+        } finally {
+            log.debug("Key:[" + key + "],resultSize:[" + list.size() + "] Cost:[" + TimeUtil.getInterval(start) + "]ms");
         }
 
         return list;
@@ -287,18 +287,18 @@ public class ClusterRedisClient extends BaseRedisClient {
         List<String> list = new ArrayList<String>();
 
         long currentTime = TimeUtil.getCurrentTime();
-        try{
+        try {
 
             Set<String> values = jedis.zrange(key, start, end);
-            if(values == null || values.size() <= 0){
+            if (values == null || values.size() <= 0) {
                 return list;
             }
             list.addAll(values);
-        }catch (Exception e){
-            log.warn("Exception : "+e.getMessage());
+        } catch (Exception e) {
+            log.warn("Exception : " + e.getMessage());
             throw e;
-        }finally{
-            log.debug("Key:["+key+"],resultSize:["+list.size()+"] Cost:["+TimeUtil.getInterval(currentTime)+"]ms");
+        } finally {
+            log.debug("Key:[" + key + "],resultSize:[" + list.size() + "] Cost:[" + TimeUtil.getInterval(currentTime) + "]ms");
         }
 
         return list;
@@ -309,18 +309,18 @@ public class ClusterRedisClient extends BaseRedisClient {
         List<String> list = new ArrayList<String>();
 
         long currentTime = TimeUtil.getCurrentTime();
-        try{
+        try {
 
             Set<String> values = jedis.zrevrange(key, start, end);
-            if(values == null || values.size() <= 0){
+            if (values == null || values.size() <= 0) {
                 return list;
             }
             list.addAll(values);
-        }catch (Exception e){
-            log.warn("Exception : "+e.getMessage());
+        } catch (Exception e) {
+            log.warn("Exception : " + e.getMessage());
             throw e;
-        }finally{
-            log.debug("Key:["+key+"],resultSize:["+list.size()+"] Cost:["+TimeUtil.getInterval(currentTime)+"]ms");
+        } finally {
+            log.debug("Key:[" + key + "],resultSize:[" + list.size() + "] Cost:[" + TimeUtil.getInterval(currentTime) + "]ms");
         }
 
         return list;
@@ -331,13 +331,13 @@ public class ClusterRedisClient extends BaseRedisClient {
         Double res = 0d;
 
         long start = TimeUtil.getCurrentTime();
-        try{
+        try {
             res = jedis.zscore(key, member);
-        }catch (Exception e){
-            log.warn("Exception : "+e.getMessage());
+        } catch (Exception e) {
+            log.warn("Exception : " + e.getMessage());
             throw e;
-        }finally{
-            log.debug("Key:["+key+"], Cost:["+TimeUtil.getInterval(start)+"]ms");
+        } finally {
+            log.debug("Key:[" + key + "], Cost:[" + TimeUtil.getInterval(start) + "]ms");
         }
 
         return res;
@@ -348,19 +348,19 @@ public class ClusterRedisClient extends BaseRedisClient {
         Map<String, Double> res = new HashMap<>();
 
         long start = TimeUtil.getCurrentTime();
-        try{
+        try {
 
             ScanResult<Tuple> values = jedis.zscan(key, "");
-            if(values != null && values.getResult() != null && values.getResult().size() > 0) {
-                for(Tuple resTuple:values.getResult()) {
+            if (values != null && values.getResult() != null && values.getResult().size() > 0) {
+                for (Tuple resTuple : values.getResult()) {
                     res.put(resTuple.getElement(), resTuple.getScore());
                 }
             }
-        }catch (Exception e){
-            log.warn("Exception : "+e.getMessage());
+        } catch (Exception e) {
+            log.warn("Exception : " + e.getMessage());
             throw e;
-        }finally{
-            log.debug("Key:["+key+"],resultSize:["+res.size()+"] Cost:["+TimeUtil.getInterval(start)+"]ms");
+        } finally {
+            log.debug("Key:[" + key + "],resultSize:[" + res.size() + "] Cost:[" + TimeUtil.getInterval(start) + "]ms");
         }
 
         return res;

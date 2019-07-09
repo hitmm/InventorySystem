@@ -18,24 +18,26 @@ import javax.servlet.http.HttpSession;
 @RequestMapping(value = "/")
 public class PageController {
     @RequestMapping(value = "tables")
-    public ModelAndView tables(HttpServletRequest request){
+    public ModelAndView tables(HttpServletRequest request) {
         ModelAndView view = new ModelAndView("views/tables");
         HttpSession session = request.getSession();
         UserInfoEntity userInfo = (UserInfoEntity) session.getAttribute("userInfo");
-        view.addObject("userInfo",userInfo);
+        view.addObject("userInfo", userInfo);
         return view;
     }
+
     @RequestMapping(value = "forms")
-    public String forms(){
+    public String forms() {
         return "views/forms";
     }
+
     @RequestMapping(value = "charts")
-    public String charts(){
+    public String charts() {
         return "views/charts";
     }
 
     @RequestMapping(value = "register")
-    public String register(){
+    public String register() {
         return "views/register";
     }
 }

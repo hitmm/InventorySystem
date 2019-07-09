@@ -11,43 +11,37 @@
  Target Server Version : 80012
  File Encoding         : 65001
 
- Date: 08/07/2019 20:53:12
+ Date: 09/07/2019 19:18:28
 */
+create database inventory;
+use inventory;
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
-CREATE DATABASE inventory;
-use inventory;
+-- ----------------------------
+-- Table structure for tb_company_info
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_company_info`;
+CREATE TABLE `tb_company_info`  (
+  `id` bigint(20) NOT NULL COMMENT '公司id',
+  `company_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '公司名称',
+  `ceo_id` bigint(20) NULL DEFAULT NULL COMMENT 'ceo id',
+  `create_time` bigint(20) NOT NULL COMMENT '创建时间',
+  `update_time` bigint(20) NOT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `ceooid`(`ceo_id`) USING BTREE,
+  CONSTRAINT `ceooid` FOREIGN KEY (`ceo_id`) REFERENCES `tb_user_info` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Table structure for tb_jsr
+-- Table structure for tb_customer_info
 -- ----------------------------
-DROP TABLE IF EXISTS `tb_jsr`;
-CREATE TABLE `tb_jsr`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(15) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `sex` char(2) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `age` int(11) NULL DEFAULT NULL,
-  `tel` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `enable` int(11) NOT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of tb_jsr
--- ----------------------------
-INSERT INTO `tb_jsr` VALUES (3, 'lx', '女', 25, '136******', 0);
-INSERT INTO `tb_jsr` VALUES (4, 'liuxin', '男', 25, '136******', 1);
-
--- ----------------------------
--- Table structure for tb_khinfo
--- ----------------------------
-DROP TABLE IF EXISTS `tb_khinfo`;
-CREATE TABLE `tb_khinfo`  (
-  `id` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '客户id',
-  `khname` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '客户全称',
-  `jian` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '客户简称',
+DROP TABLE IF EXISTS `tb_customer_info`;
+CREATE TABLE `tb_customer_info`  (
+  `id` bigint(20) NOT NULL COMMENT '客户id',
+  `customer_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '客户全称',
+  `customer_alias` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '客户简称',
   `address` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '客户地址',
   `postal_code` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '客户的邮政编码',
   `tel` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '客户电话',
@@ -57,288 +51,21 @@ CREATE TABLE `tb_khinfo`  (
   `mail` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '联系人邮箱',
   `bank_name` varchar(60) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '开户行',
   `bank_number` varchar(60) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '银行账号',
+  `create_time` bigint(20) NOT NULL COMMENT '创建时间',
+  `update_time` bigint(20) NOT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of tb_khinfo
+-- Table structure for tb_goods_info
 -- ----------------------------
-INSERT INTO `tb_khinfo` VALUES ('kh1001', '明日科技有限公司', '明日', '长春市东盛大街', '111111', '111111', '111111', '高经理', '544444', '888@**.com', '544554', '454545');
-INSERT INTO `tb_khinfo` VALUES ('kh1002', '吉林省明日科技有限公司', '明日科技', '长春市二道区', '1111110', '52415', '54252', '高经理', '136524', 'mingrisoft@mingrisoft.com.cn', '建设银\r\n行', '231586');
-INSERT INTO `tb_khinfo` VALUES ('kh1003', '五*缤纷', '五彩', '长春市', '122', '45644', '8888', '路路', '1000402', '0*@*4.com', '25250', '020202');
-INSERT INTO `tb_khinfo` VALUES ('kh1004', '小小公司', 'XXGS', '长春市', '1010', '1111', '1111', '明子', '121212', '88*@.com', '8888', '88');
-
--- ----------------------------
--- Table structure for tb_kucun
--- ----------------------------
-DROP TABLE IF EXISTS `tb_kucun`;
-CREATE TABLE `tb_kucun`  (
-  `id` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
-  `spname` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `jc` varchar(25) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `cd` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `gg` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `bz` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `dw` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `dj` decimal(10, 2) NULL DEFAULT NULL,
-  `kcsl` int(11) NULL DEFAULT NULL
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of tb_kucun
--- ----------------------------
-INSERT INTO `tb_kucun` VALUES ('sp1005', '润*滴眼液', 'RZDYY', '山*正大福*达制药有限公司', '10ml/支', '纸盒', '盒', 40.00, 19400);
-INSERT INTO `tb_kucun` VALUES ('sp1007', '铅笔', 'QB', '长春', '9*', '沿着', '铅笔厂', 10.00, 4);
-INSERT INTO `tb_kucun` VALUES ('sp1008', '手工艺品', 'SAYP', '长春市', '1', '5', '长春', 10.00, 999);
-INSERT INTO `tb_kucun` VALUES ('sp1003', '碧**莉香型洗衣粉', 'BLMLXXXYF', '广**保洁公司', '350g', '塑包', '袋', 0.00, 6);
-
--- ----------------------------
--- Table structure for tb_rkth_detail
--- ----------------------------
-DROP TABLE IF EXISTS `tb_rkth_detail`;
-CREATE TABLE `tb_rkth_detail`  (
-  `rkthID` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `spid` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `dj` decimal(10, 2) NOT NULL,
-  `sl` int(11) NOT NULL
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of tb_rkth_detail
--- ----------------------------
-INSERT INTO `tb_rkth_detail` VALUES ('RT20050923001', 'sp1003', 3.50, 1);
-INSERT INTO `tb_rkth_detail` VALUES ('RT20050926001', 'sp1003', 3.40, 10);
-INSERT INTO `tb_rkth_detail` VALUES ('RT20051005002', 'sp1003', 3.40, 1);
-INSERT INTO `tb_rkth_detail` VALUES ('RT20051005002', 'sp1002', 890.00, 1);
-INSERT INTO `tb_rkth_detail` VALUES ('RT20071020001', 'sp1005', 431.00, 10);
-INSERT INTO `tb_rkth_detail` VALUES ('RT20071020001', 'sp1004', 120.00, 2);
-INSERT INTO `tb_rkth_detail` VALUES ('RT20071109001', 'sp1001', 101.00, 1000);
-INSERT INTO `tb_rkth_detail` VALUES ('RT20071109002', 'sp1005', 40.00, 10);
-INSERT INTO `tb_rkth_detail` VALUES ('RT20080403001', 'sp1002', 23.00, 462);
-INSERT INTO `tb_rkth_detail` VALUES ('RT20080410005', 'sp1002', 432.00, 0);
-INSERT INTO `tb_rkth_detail` VALUES ('RT20080521001', 'sp1007', 10.00, 5);
-
--- ----------------------------
--- Table structure for tb_rkth_main
--- ----------------------------
-DROP TABLE IF EXISTS `tb_rkth_main`;
-CREATE TABLE `tb_rkth_main`  (
-  `rkthID` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `pzs` float NOT NULL,
-  `je` decimal(10, 2) NOT NULL,
-  `ysjl` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `gysname` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `rtdate` datetime(0) NOT NULL,
-  `czy` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `jsr` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `jsfs` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of tb_rkth_main
--- ----------------------------
-INSERT INTO `tb_rkth_main` VALUES ('RT20050923001', 1, 3.50, '3.50', '新*纪文化百货商城', '2005-09-23 15:19:24', 'admin', 'wgh', '现金');
-INSERT INTO `tb_rkth_main` VALUES ('RT20050926001', 1, 34.00, '0.00', '振撼*琴行', '2005-09-26 14:01:48', 'admin', 'wg', '现金');
-INSERT INTO `tb_rkth_main` VALUES ('RT20051005001', 1, 3.40, '0.00', '振撼*琴行', '2005-10-05 09:09:34', 'admin', 'hj', '现金');
-INSERT INTO `tb_rkth_main` VALUES ('RT20051005002', 2, 893.40, '0.00', '振撼*琴行', '2005-10-05 13:05:35', 'admin', 'wq', '现金');
-INSERT INTO `tb_rkth_main` VALUES ('RT20071020001', 2, 4550.00, '33333', '振撼*琴行', '2007-10-20 09:10:49', 'mr', '33333', '现金');
-INSERT INTO `tb_rkth_main` VALUES ('RT20071109001', 1, 101000.00, '合格', '振撼*琴行', '2007-11-09 14:32:39', 'mr', '00', '现金');
-INSERT INTO `tb_rkth_main` VALUES ('RT20071109002', 1, 400.00, '质量有问题', '振撼*琴行', '2007-11-09 15:50:03', 'mr', '11', '现金');
-INSERT INTO `tb_rkth_main` VALUES ('RT20080403001', 1, 10626.00, '4444', '新*纪文化百货商城', '2008-04-03 15:52:16', '', '44', '现金');
-INSERT INTO `tb_rkth_main` VALUES ('RT20080410001', 1, 432.00, '1', '新*纪文化百货商城', '2008-04-10 10:33:51', '', '1', '现金');
-INSERT INTO `tb_rkth_main` VALUES ('RT20080410002', 1, 0.00, '12', '新*纪文化百货商城', '2008-04-10 10:37:56', 'tsoft', '范德萨', '现金');
-INSERT INTO `tb_rkth_main` VALUES ('RT20080410003', 1, -432.00, '12', '新*纪文化百货商城', '2008-04-10 10:38:23', 'tsoft', '范德萨', '现金');
-INSERT INTO `tb_rkth_main` VALUES ('RT20080521001', 1, 50.00, '合格', '新*纪文化百货商城', '2008-05-21 14:47:37', 'tsoft', '范德萨', '现金');
-INSERT INTO `tb_rkth_main` VALUES ('RT20080410004', 1, 0.00, '12', '新*纪文化百货商城', '2008-04-10 10:39:13', 'tsoft', '范德萨', '现金');
-INSERT INTO `tb_rkth_main` VALUES ('RT20080410005', 1, 0.00, '12', '新*纪文化百货商城', '2008-04-10 10:40:31', 'tsoft', '范德萨', '现金');
-
--- ----------------------------
--- Table structure for tb_ruku_detail
--- ----------------------------
-DROP TABLE IF EXISTS `tb_ruku_detail`;
-CREATE TABLE `tb_ruku_detail`  (
-  `rkID` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `spid` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `dj` decimal(10, 2) NOT NULL,
-  `sl` int(11) NOT NULL
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of tb_ruku_detail
--- ----------------------------
-INSERT INTO `tb_ruku_detail` VALUES ('RK20071016001', 'sp1004', 12.00, 1142);
-INSERT INTO `tb_ruku_detail` VALUES ('RK20071016001', 'sp1001', 10.00, 100);
-INSERT INTO `tb_ruku_detail` VALUES ('RK20071016002', 'sp1001', 10.00, 400);
-INSERT INTO `tb_ruku_detail` VALUES ('RK20071016003', 'sp1005', 10.00, 400);
-INSERT INTO `tb_ruku_detail` VALUES ('RK20071016003', 'sp1001', 10.00, 500);
-INSERT INTO `tb_ruku_detail` VALUES ('RK20071016004', 'sp1005', 10.00, 100);
-INSERT INTO `tb_ruku_detail` VALUES ('RK20071016004', 'sp1001', 10.00, 10);
-INSERT INTO `tb_ruku_detail` VALUES ('RK20071016005', 'sp1004', 10.00, 110);
-INSERT INTO `tb_ruku_detail` VALUES ('RK20071016005', 'sp1005', 100.00, 1000);
-INSERT INTO `tb_ruku_detail` VALUES ('RK20071016006', 'sp1004', 321.00, 432);
-INSERT INTO `tb_ruku_detail` VALUES ('RK20071016006', 'sp1005', 432.00, 3330);
-INSERT INTO `tb_ruku_detail` VALUES ('RK20071020001', 'sp1004', 12.00, 232);
-INSERT INTO `tb_ruku_detail` VALUES ('RK20071109001', 'sp1002', 22.00, 22);
-INSERT INTO `tb_ruku_detail` VALUES ('RK20071109002', 'sp1007', 10.00, 10);
-INSERT INTO `tb_ruku_detail` VALUES ('RK20071109003', 'sp1005', 40.00, 100);
-INSERT INTO `tb_ruku_detail` VALUES ('RK20071112001', 'sp1008', 10.00, 1000);
-INSERT INTO `tb_ruku_detail` VALUES ('RK20080403001', 'sp1002', 43.00, 32);
-INSERT INTO `tb_ruku_detail` VALUES ('RK20080403002', 'sp1002', 23.00, 430);
-INSERT INTO `tb_ruku_detail` VALUES ('RK20080410007', 'sp1003', 3.00, 2);
-INSERT INTO `tb_ruku_detail` VALUES ('RK20080410008', 'sp1002', 432.00, 432);
-INSERT INTO `tb_ruku_detail` VALUES ('RK20080410009', 'sp1003', 0.00, 0);
-INSERT INTO `tb_ruku_detail` VALUES ('RK20080521001', 'sp1007', 10.00, 10);
-INSERT INTO `tb_ruku_detail` VALUES ('RK20100209001', 'sp1009', 1.00, 100);
-INSERT INTO `tb_ruku_detail` VALUES ('RK20080410009', 'sp1007', 0.00, 0);
-
--- ----------------------------
--- Table structure for tb_ruku_main
--- ----------------------------
-DROP TABLE IF EXISTS `tb_ruku_main`;
-CREATE TABLE `tb_ruku_main`  (
-  `rkID` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `pzs` int(11) NOT NULL,
-  `je` decimal(10, 2) NOT NULL,
-  `ysjl` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `gysname` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `rkdate` datetime(0) NOT NULL,
-  `czy` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `jsr` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `jsfs` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of tb_ruku_main
--- ----------------------------
-INSERT INTO `tb_ruku_main` VALUES ('RK20071016001', 2, 14704.00, '合格', '振撼*琴行', '2007-10-16 10:32:26', '测试人员', '某人', '现金');
-INSERT INTO `tb_ruku_main` VALUES ('RK20071016002', 1, 4000.00, '合格', '振撼*琴行', '2007-10-16 10:39:28', '测试人员', '小小', '现金');
-INSERT INTO `tb_ruku_main` VALUES ('RK20071016003', 2, 9000.00, '合格', '振撼*琴行', '2007-10-16 10:40:00', '测试人员', '小小', '现金');
-INSERT INTO `tb_ruku_main` VALUES ('RK20071016004', 2, 1100.00, '1111', '振撼*琴行', '2007-10-16 10:42:18', '测试人员', '1111', '现金');
-INSERT INTO `tb_ruku_main` VALUES ('RK20071016005', 2, 101100.00, 'fdsa', '振撼*琴行', '2007-10-16 10:45:14', '测试人员', 'fds', '现金');
-INSERT INTO `tb_ruku_main` VALUES ('RK20071016006', 2, 1577232.00, 'fdsa', '振撼*琴行', '2007-10-16 10:45:31', '测试人员', 'fds', '现金');
-INSERT INTO `tb_ruku_main` VALUES ('RK20071020001', 1, 2784.00, 'fff', '振撼*琴行', '2007-10-20 09:04:36', 'mr', 'lzw', '现金');
-INSERT INTO `tb_ruku_main` VALUES ('RK20071109001', 1, 484.00, '合格', '新*纪文化百货商城', '2007-11-09 14:27:56', 'mr', '玲子', '现金');
-INSERT INTO `tb_ruku_main` VALUES ('RK20071109002', 1, 100.00, '合格', '新*纪文化百货商城', '2007-11-09 14:28:24', 'mr', '玲子', '现金');
-INSERT INTO `tb_ruku_main` VALUES ('RK20071109003', 1, 4000.00, '合格', '振撼*琴行', '2007-11-09 15:49:32', 'mr', '小百', '现金');
-INSERT INTO `tb_ruku_main` VALUES ('RK20071112001', 1, 10000.00, '010', '吉林省明日*业有限公司', '2007-11-12 10:47:31', 'mr', '11', '现金');
-INSERT INTO `tb_ruku_main` VALUES ('RK20080403001', 1, 1376.00, 'ds', '新*纪文化百货商城', '2008-04-03 00:00:00', 'null', 'ggf', '现金结款');
-INSERT INTO `tb_ruku_main` VALUES ('RK20080403002', 1, 9890.00, 'ftf', '新*纪文化百货商城', '2008-04-03 00:00:00', '小陈', '33', '现金结款');
-INSERT INTO `tb_ruku_main` VALUES ('RK20080410001', 1, 0.00, '23', '新*纪文化百货商城', '2008-04-10 00:00:00', '范德萨', '范德萨', '现金结款');
-INSERT INTO `tb_ruku_main` VALUES ('RK20080410002', 1, 0.00, '543', '新*纪文化百货商城', '2008-04-10 00:00:00', '范德萨', '范德萨', '现金结款');
-INSERT INTO `tb_ruku_main` VALUES ('RK20080410003', 1, 8.00, '111', '新*纪文化百货商城', '2008-04-10 00:00:00', '范德萨', '范德萨', '现金结款');
-INSERT INTO `tb_ruku_main` VALUES ('RK20080410004', 1, 2795.00, '432', '新*纪文化百货商城', '2008-04-10 00:00:00', '范德萨', '范德萨', '现金结款');
-INSERT INTO `tb_ruku_main` VALUES ('RK20080410007', 1, 6.00, '2321', '新*纪文化百货商城', '2008-04-10 00:00:00', '范德萨', '范德萨', '现金结款');
-INSERT INTO `tb_ruku_main` VALUES ('RK20080410008', 1, 186624.00, '32', '新*纪文化百货商城', '2008-04-10 00:00:00', '范德萨', '范德萨', '现金结款');
-INSERT INTO `tb_ruku_main` VALUES ('RK20080521001', 1, 100.00, '合格', '新*纪文化百货商城', '2008-05-21 00:00:00', '范德萨', '范德萨', '现金结款');
-INSERT INTO `tb_ruku_main` VALUES ('RK20100209001', 1, 100.00, '10', '笔*有限公司', '2010-02-09 00:00:00', 'liuxin', 'liuxin', '现金结款');
-INSERT INTO `tb_ruku_main` VALUES ('RK20080410005', 1, 0.00, 'g', '新*纪文化百货商城', '2008-04-10 00:00:00', '范德萨', '范德萨', '现金结款');
-INSERT INTO `tb_ruku_main` VALUES ('RK20080410006', 1, 736.00, '111', '新*纪文化百货商城', '2008-04-10 00:00:00', '范德萨', '范德萨', '现金结款');
-INSERT INTO `tb_ruku_main` VALUES ('RK20080410009', 2, 0.00, '22', '新*纪文化百货商城', '2008-04-10 00:00:00', '范德萨', '范德萨', '现金结款');
-
--- ----------------------------
--- Table structure for tb_sell_detail
--- ----------------------------
-DROP TABLE IF EXISTS `tb_sell_detail`;
-CREATE TABLE `tb_sell_detail`  (
-  `sellID` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `spid` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `dj` decimal(10, 2) NOT NULL,
-  `sl` float NOT NULL
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of tb_sell_detail
--- ----------------------------
-INSERT INTO `tb_sell_detail` VALUES ('XS20050923001', 'sp1003', 3.50, 1);
-INSERT INTO `tb_sell_detail` VALUES ('XS20050923001', 'sp1001', 789.00, 1);
-INSERT INTO `tb_sell_detail` VALUES ('XS20050923002', 'sp1003', 3.50, 2);
-INSERT INTO `tb_sell_detail` VALUES ('XS20050926001', 'sp1005', 10.00, 1);
-INSERT INTO `tb_sell_detail` VALUES ('XS20051004001', 'sp1005', 8.70, 2);
-INSERT INTO `tb_sell_detail` VALUES ('XS20050104001', 'sp1002', 890.00, 1);
-INSERT INTO `tb_sell_detail` VALUES ('XS20050104002', 'sp1002', 890.00, 1);
-INSERT INTO `tb_sell_detail` VALUES ('XS20050120001', 'sp1002', 890.00, 1);
-INSERT INTO `tb_sell_detail` VALUES ('XS20050220001', 'sp1002', 890.00, 1);
-INSERT INTO `tb_sell_detail` VALUES ('XS20051004002', 'sp1002', 890.00, 1);
-INSERT INTO `tb_sell_detail` VALUES ('XS20051004003', 'sp1005', 8.70, 2);
-INSERT INTO `tb_sell_detail` VALUES ('XS20051004004', 'sp1003', 3.40, 4);
-INSERT INTO `tb_sell_detail` VALUES ('XS20050309001', 'sp1001', 1500.00, 1);
-INSERT INTO `tb_sell_detail` VALUES ('XS20050309002', 'sp1002', 890.00, 1);
-INSERT INTO `tb_sell_detail` VALUES ('XS20050309002', 'sp1001', 1500.00, 1);
-INSERT INTO `tb_sell_detail` VALUES ('XS20051005001', 'sp1001', 1500.00, 1);
-INSERT INTO `tb_sell_detail` VALUES ('XS20051005002', 'sp1002', 890.00, 1);
-INSERT INTO `tb_sell_detail` VALUES ('XS20051005002', 'sp1005', 8.70, 1);
-INSERT INTO `tb_sell_detail` VALUES ('XS20051005003', 'sp1003', 3.40, 1);
-INSERT INTO `tb_sell_detail` VALUES ('XS20051005004', 'sp1004', 790.00, 1);
-INSERT INTO `tb_sell_detail` VALUES ('XS20051005004', 'sp1001', 1500.00, 1);
-INSERT INTO `tb_sell_detail` VALUES ('XS20051006001', 'sp1003', 3.40, 1);
-INSERT INTO `tb_sell_detail` VALUES ('XS20071016001', 'sp1004', 321.00, 16);
-INSERT INTO `tb_sell_detail` VALUES ('XS20071017001', 'sp1004', 321.00, 1668);
-INSERT INTO `tb_sell_detail` VALUES ('XS20071109001', 'sp1007', 10.00, 5);
-INSERT INTO `tb_sell_detail` VALUES ('XS20071115001', 'sp1002', 22.00, 22);
-INSERT INTO `tb_sell_detail` VALUES ('XS20080410003', 'sp1002', 432.00, 0);
-INSERT INTO `tb_sell_detail` VALUES ('XS20080521001', 'sp1007', 10.00, 1);
-INSERT INTO `tb_sell_detail` VALUES ('XS20150507001', 'sp1009', 1.00, 200);
-INSERT INTO `tb_sell_detail` VALUES ('XS20150507002', 'sp1008', 10.00, 1);
-INSERT INTO `tb_sell_detail` VALUES ('XS20150507002', 'sp1007', 10.00, 1);
-INSERT INTO `tb_sell_detail` VALUES ('XS20150507002', 'sp1009', 1.00, 3);
-
--- ----------------------------
--- Table structure for tb_sell_main
--- ----------------------------
-DROP TABLE IF EXISTS `tb_sell_main`;
-CREATE TABLE `tb_sell_main`  (
-  `sellID` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `pzs` int(11) NOT NULL,
-  `je` decimal(10, 2) NOT NULL,
-  `ysjl` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `khname` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `xsdate` datetime(0) NOT NULL,
-  `czy` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `jsr` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `jsfs` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of tb_sell_main
--- ----------------------------
-INSERT INTO `tb_sell_main` VALUES ('XS20050104001', 1, 890.00, '100.00', '新*纪文化百货用品商城', '2005-01-04 15:27:48', 'admin', 'gh', '现金');
-INSERT INTO `tb_sell_main` VALUES ('XS20050104002', 1, 890.00, '100.00', '新*纪文化百货用品商城', '2005-01-04 15:28:10', 'admin', 'wg', '现金');
-INSERT INTO `tb_sell_main` VALUES ('XS20050120001', 1, 890.00, '200.00', '新*纪文化百货用品商城', '2005-01-20 15:28:51', 'admin', 'g', '现金');
-INSERT INTO `tb_sell_main` VALUES ('XS20050220001', 1, 890.00, '100.00', '新*纪文化百货用品商城', '2005-02-20 15:29:31', 'admin', 'gh', '现金');
-INSERT INTO `tb_sell_main` VALUES ('XS20050309001', 1, 1500.00, '0.00', '新*纪文化百货用品商城', '2005-03-09 15:42:32', 'admin', 'kk', '现金');
-INSERT INTO `tb_sell_main` VALUES ('XS20050309002', 2, 2390.00, '2000.00', '新*纪文化百货用品商城', '2005-03-09 17:20:00', 'admin', '言', '现金');
-INSERT INTO `tb_sell_main` VALUES ('XS20050923001', 2, 792.50, '792.50', '新*纪文化百货用品商城', '2005-09-23 13:12:45', 'admin', 'wgh', '现金');
-INSERT INTO `tb_sell_main` VALUES ('XS20050923002', 1, 7.00, '7.00', '新*纪文化百货用品商城', '2005-09-23 13:13:04', 'admin', 'wgh', '现金');
-INSERT INTO `tb_sell_main` VALUES ('XS20050926001', 1, 10.00, '10.00', '新*纪文化百货用品商城', '2005-09-26 13:58:30', 'admin', 'wgh', '现金');
-INSERT INTO `tb_sell_main` VALUES ('XS20051004001', 1, 17.40, '17.40', '新*纪文化百货用品商城', '2005-10-04 13:19:03', 'admin', 'wgh', '现金');
-INSERT INTO `tb_sell_main` VALUES ('XS20051004002', 1, 890.00, '0.00', '新*纪文化百货用品商城', '2005-10-04 15:30:04', 'admin', 'wgh', '现金');
-INSERT INTO `tb_sell_main` VALUES ('XS20051004003', 1, 17.40, '0.00', '新*纪文化百货用品商城', '2005-10-04 15:30:23', 'admin', 'gh', '现金');
-INSERT INTO `tb_sell_main` VALUES ('XS20051004004', 1, 13.60, '0.00', '新*纪文化百货用品商城', '2005-10-04 15:31:38', 'admin', 'w', '现金');
-INSERT INTO `tb_sell_main` VALUES ('XS20051005001', 1, 1500.00, '0.00', '新*纪文化百货用品商城', '2005-10-05 08:24:02', 'admin', 'ttt', '现金');
-INSERT INTO `tb_sell_main` VALUES ('XS20051005002', 2, 898.70, '0.00', '新*纪文化百货用品商城', '2005-10-05 08:24:28', 'admin', 'eee', '现金');
-INSERT INTO `tb_sell_main` VALUES ('XS20051005003', 1, 3.40, '3.40', '新*纪文化百货用品商城', '2005-10-05 08:41:07', 'admin', 'ww', '现金');
-INSERT INTO `tb_sell_main` VALUES ('XS20051005004', 2, 2290.00, '2000.00', '新*纪文化百货用品商城', '2005-10-05 08:42:29', 'admin', 'eutwin', '现金');
-INSERT INTO `tb_sell_main` VALUES ('XS20051006001', 1, 3.40, '2.40', '新*纪文化百货用品商城', '2005-10-06 08:54:38', 'yan', 'yyy', '现金');
-INSERT INTO `tb_sell_main` VALUES ('XS20071016001', 1, 5136.00, 'fds', '明日科技有限公司', '2007-10-16 17:00:08', '测试人员', '伙', '现金');
-INSERT INTO `tb_sell_main` VALUES ('XS20071017001', 1, 535428.00, '4321', '明日科技有限公司', '2007-10-17 08:49:34', '测试人员', '4321', '现金');
-INSERT INTO `tb_sell_main` VALUES ('XS20071109001', 1, 50.00, '合格', '明日科技有限公司', '2007-11-09 14:41:40', 'mr', '小刘', '现金');
-INSERT INTO `tb_sell_main` VALUES ('XS20071115001', 1, 484.00, 'ggg', '明日科技有限公司', '2007-11-15 18:41:15', 'mr', '00', '现金');
-INSERT INTO `tb_sell_main` VALUES ('XS20080410001', 2, 219024.00, 'e2', '明日科技有限公司', '2008-04-10 10:26:47', '', '范德萨', '现金');
-INSERT INTO `tb_sell_main` VALUES ('XS20080410002', 1, 0.00, 'e2', '明日科技有限公司', '2008-04-10 10:27:51', '', '范德萨', '现金');
-INSERT INTO `tb_sell_main` VALUES ('XS20080410003', 1, 0.00, 'e2', '明日科技有限公司', '2008-04-10 10:28:54', '', '范德萨', '现金');
-INSERT INTO `tb_sell_main` VALUES ('XS20080521001', 1, 10.00, '10', '明日科技有限公司', '2008-05-21 14:57:55', 'tsoft', '范德萨', '现金');
-INSERT INTO `tb_sell_main` VALUES ('XS20150507001', 1, 200.00, '测试是否会出库大于库存', '明日科技有限公司', '2015-05-07 15:44:33', 'tsoft', 'liuxin', '现金');
-INSERT INTO `tb_sell_main` VALUES ('XS20150507002', 3, 23.00, '1111111111111', '明日科技有限公司', '2015-05-07 16:31:10', 'tsoft', 'liuxin', '现金');
-
--- ----------------------------
--- Table structure for tb_spinfo
--- ----------------------------
-DROP TABLE IF EXISTS `tb_spinfo`;
-CREATE TABLE `tb_spinfo`  (
-  `id` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '商品id',
+DROP TABLE IF EXISTS `tb_goods_info`;
+CREATE TABLE `tb_goods_info`  (
+  `id` bigint(20) NOT NULL COMMENT '商品id',
   `goods_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '商品名称',
   `goods_alias` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '商品简称',
   `origin_place` varchar(60) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '产地',
+  `unit_price` decimal(10, 2) NULL DEFAULT NULL COMMENT '商品单价',
   `unit` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '单位',
   `specifications` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '规格',
   `package` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '包装',
@@ -346,21 +73,133 @@ CREATE TABLE `tb_spinfo`  (
   `approval_number` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '批准文号',
   `remarks` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备注',
   `supplier_id` bigint(20) NULL DEFAULT NULL COMMENT '供应商id',
+  `create_time` bigint(20) NOT NULL COMMENT '创建时间',
+  `update_time` bigint(20) NOT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `supplier_id1`(`supplier_id`) USING BTREE,
   CONSTRAINT `supplier_id1` FOREIGN KEY (`supplier_id`) REFERENCES `tb_supplier_info` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of tb_spinfo
+-- Table structure for tb_handler
 -- ----------------------------
-INSERT INTO `tb_spinfo` VALUES ('sp1001', '电吉他', '吉他1', '中**连', '把', 'FD－3100', '盒', '56217', '23232', '无限延音功能、自带效果器', NULL);
-INSERT INTO `tb_spinfo` VALUES ('sp1002', '木吉他', '吉他', '中**海', '把', 'HM2100', '盒', '32286', '875845624', '可接电', NULL);
-INSERT INTO `tb_spinfo` VALUES ('sp1005', '润*滴眼液', 'RZDYY', '山*正大福*达制药有限公司', '盒', '10ml/支', '纸盒', '20040728', '鲁*消备字', '', NULL);
-INSERT INTO `tb_spinfo` VALUES ('sp1006', '电吉他', '电吉他', '电吉他', '电吉他', '电吉他', '', '', '', '', NULL);
-INSERT INTO `tb_spinfo` VALUES ('sp1007', '铅笔', 'QB', '长春', '铅笔厂', '9*', '沿着', '14**', '222**', '无', NULL);
-INSERT INTO `tb_spinfo` VALUES ('sp1008', '手工艺品', 'SAYP', '长春市', '长春', '1', '5', '25', '212', '很不错', NULL);
-INSERT INTO `tb_spinfo` VALUES ('sp1009', '锅巴', '锅巴', '吉林', '袋', '200G/袋', '袋', '001', '2131213', '无', NULL);
+DROP TABLE IF EXISTS `tb_handler`;
+CREATE TABLE `tb_handler`  (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '经手人id',
+  `name` varchar(15) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '经手人姓名',
+  `sex` char(2) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '经手人性别',
+  `age` int(11) NULL DEFAULT NULL COMMENT '经手人年龄',
+  `tel` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '经手人联系方式',
+  `enable` int(11) NOT NULL COMMENT '是否启用',
+  `user_id` bigint(20) NOT NULL COMMENT '对应的用户id',
+  `company_id` bigint(20) NOT NULL COMMENT '所属公司id',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `iid`(`user_id`) USING BTREE,
+  INDEX `companyiid`(`company_id`) USING BTREE,
+  CONSTRAINT `iid` FOREIGN KEY (`user_id`) REFERENCES `tb_user_info` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `companyiid` FOREIGN KEY (`company_id`) REFERENCES `tb_company_info` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for tb_sales_return_detail
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_sales_return_detail`;
+CREATE TABLE `tb_sales_return_detail`  (
+  `id` bigint(20) NOT NULL COMMENT '销售退货id',
+  `goods_id` bigint(20) NOT NULL COMMENT '关联商品id',
+  `unit_price` decimal(10, 2) NOT NULL COMMENT '单价',
+  `return_number` int(11) NOT NULL COMMENT '销售退货数量',
+  `main_id` bigint(20) NOT NULL COMMENT '对应的主表id',
+  `create_time` bigint(20) NOT NULL COMMENT '创建时间',
+  `update_time` bigint(20) NOT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `goodsid`(`goods_id`) USING BTREE,
+  INDEX `salesmainid`(`main_id`) USING BTREE,
+  CONSTRAINT `goodsid` FOREIGN KEY (`goods_id`) REFERENCES `tb_goods_info` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `salesmainid` FOREIGN KEY (`main_id`) REFERENCES `tb_sales_return_main` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for tb_sales_return_main
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_sales_return_main`;
+CREATE TABLE `tb_sales_return_main`  (
+  `id` bigint(20) NOT NULL COMMENT '销退票号',
+  `varieties_num` int(11) NOT NULL COMMENT '品种数量',
+  `total_money` decimal(10, 2) NOT NULL COMMENT '总计金额',
+  `acc_conclusion` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '验收结论',
+  `customer_id` bigint(20) NOT NULL COMMENT '客户id',
+  `return_time` bigint(20) NOT NULL COMMENT '退货日期',
+  `operator_id` bigint(20) NOT NULL COMMENT '操作员',
+  `handler_id` bigint(20) NOT NULL COMMENT '经手人',
+  `trades_way` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '结算方式',
+  `create_time` bigint(20) NOT NULL COMMENT '创建时间',
+  `update_time` bigint(20) NOT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `handlerid`(`handler_id`) USING BTREE,
+  INDEX `operatorid`(`operator_id`) USING BTREE,
+  INDEX `customerid`(`customer_id`) USING BTREE,
+  CONSTRAINT `handlerid` FOREIGN KEY (`handler_id`) REFERENCES `tb_handler` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `operatorid` FOREIGN KEY (`operator_id`) REFERENCES `tb_user_info` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `customerid` FOREIGN KEY (`customer_id`) REFERENCES `tb_customer_info` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for tb_sell_detail
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_sell_detail`;
+CREATE TABLE `tb_sell_detail`  (
+  `id` bigint(20) NOT NULL COMMENT '流水号',
+  `goods_id` bigint(50) NOT NULL COMMENT '商品编号',
+  `unit_price` decimal(10, 2) NOT NULL COMMENT '销售单价',
+  `sale_number` float NOT NULL COMMENT '销售数量',
+  `main_id` bigint(20) NOT NULL COMMENT '对应的主表id',
+  `create_time` bigint(20) NOT NULL COMMENT '创建时间',
+  `update_time` bigint(20) NOT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `sellgoodsid`(`goods_id`) USING BTREE,
+  INDEX `sellmainid`(`main_id`) USING BTREE,
+  CONSTRAINT `sellgoodsid` FOREIGN KEY (`goods_id`) REFERENCES `tb_goods_info` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `sellmainid` FOREIGN KEY (`main_id`) REFERENCES `tb_sell_main` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for tb_sell_main
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_sell_main`;
+CREATE TABLE `tb_sell_main`  (
+  `id` bigint(20) NOT NULL COMMENT '销售主表id',
+  `varieties_num` int(11) NOT NULL COMMENT '销售品种数目',
+  `total_money` decimal(10, 2) NOT NULL COMMENT '总计金额',
+  `acc_conclusion` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '验收结论',
+  `customer_id` bigint(20) NOT NULL COMMENT '客户id',
+  `sale_time` bigint(20) NOT NULL COMMENT '销售时间',
+  `operator_id` bigint(20) NOT NULL COMMENT '操作员id',
+  `handler_id` bigint(20) NOT NULL COMMENT '经手人id',
+  `trades_way` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '交易方式',
+  `create_time` bigint(20) NOT NULL COMMENT '创建时间',
+  `update_time` bigint(20) NOT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `customerid1`(`customer_id`) USING BTREE,
+  INDEX `operatorid1`(`operator_id`) USING BTREE,
+  INDEX `handlerid1`(`handler_id`) USING BTREE,
+  CONSTRAINT `customerid1` FOREIGN KEY (`customer_id`) REFERENCES `tb_customer_info` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `operatorid1` FOREIGN KEY (`operator_id`) REFERENCES `tb_user_info` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `handlerid1` FOREIGN KEY (`handler_id`) REFERENCES `tb_handler` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for tb_stock
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_stock`;
+CREATE TABLE `tb_stock`  (
+  `id` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '商品id',
+  `goods_id` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '商品id',
+  `storage_capacity` int(11) NULL DEFAULT NULL COMMENT '库存数量',
+  `create_time` bigint(20) NOT NULL COMMENT '创建时间',
+  `update_time` bigint(20) NOT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for tb_supplier_info
@@ -379,22 +218,16 @@ CREATE TABLE `tb_supplier_info`  (
   `bank` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '开户银行',
   `email` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '电子邮箱',
   `bank_number` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '银行账号',
+  `create_time` bigint(20) NOT NULL COMMENT '创建时间',
+  `update_time` bigint(20) NOT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of tb_supplier_info
+-- Table structure for tb_user_info
 -- ----------------------------
-INSERT INTO `tb_supplier_info` VALUES (1002, '新*纪文化百货商城', '新百', '吉林省辽源市', '1363', '0437-6930**', '52186**', '于X', '138686*****', '中国人民银行', 'y*@etang.com', NULL);
-INSERT INTO `tb_supplier_info` VALUES (1004, '吉林省明日*业有限公司', 'JLMRSY', '长春市东盛大街89号', '', '0431-4972**', '', 'ww', '', '', '', NULL);
-INSERT INTO `tb_supplier_info` VALUES (1005, '笔*有限公司', 'BHYXGS', '长在市', '1111', '1212', '2151', '毛皮', '44411', '8*@1*.com', '8885', NULL);
-INSERT INTO `tb_supplier_info` VALUES (1007, '***供应商公司', 'GYS', '长春市二道区', '130031', '2132', '1111', '32121', '231231', '231213', '231231', NULL);
-
--- ----------------------------
--- Table structure for tb_userlist
--- ----------------------------
-DROP TABLE IF EXISTS `tb_userlist`;
-CREATE TABLE `tb_userlist`  (
+DROP TABLE IF EXISTS `tb_user_info`;
+CREATE TABLE `tb_user_info`  (
   `id` bigint(20) NOT NULL COMMENT '用户id',
   `username` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '用户名',
   `password` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '密码',
@@ -406,66 +239,85 @@ CREATE TABLE `tb_userlist`  (
   `idcard` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '身份证号码',
   `imei` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '移动端设备标识',
   `cityId` int(11) NULL DEFAULT NULL COMMENT '用户所在城市Id',
+  `create_time` bigint(20) NOT NULL COMMENT '创建时间',
+  `update_time` bigint(20) NOT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of tb_userlist
+-- Records of tb_user_info
 -- ----------------------------
-INSERT INTO `tb_userlist` VALUES (0, 'tsoft', '111', 0, 0, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `tb_user_info` VALUES (0, 'tsoft', '111', 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0);
 
 -- ----------------------------
--- Table structure for tb_xsth_detail
+-- Table structure for tb_warehouse_return_detail
 -- ----------------------------
-DROP TABLE IF EXISTS `tb_xsth_detail`;
-CREATE TABLE `tb_xsth_detail`  (
-  `xsthID` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `spid` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `dj` decimal(10, 2) NOT NULL,
-  `sl` int(11) NOT NULL
+DROP TABLE IF EXISTS `tb_warehouse_return_detail`;
+CREATE TABLE `tb_warehouse_return_detail`  (
+  `id` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '进货退货id',
+  `goods_id` bigint(20) NOT NULL COMMENT '商品id',
+  `unit_price` decimal(10, 2) NOT NULL COMMENT '单价',
+  `return_number` int(11) NOT NULL COMMENT '退回数量',
+  `main_id` bigint(20) NOT NULL COMMENT '关联主表id',
+  `create_time` bigint(20) NOT NULL COMMENT '创建时间',
+  `update_time` bigint(20) NOT NULL COMMENT '更新时间'
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of tb_xsth_detail
+-- Table structure for tb_warehouse_return_main
 -- ----------------------------
-INSERT INTO `tb_xsth_detail` VALUES ('XT20051005001', 'sp1004', 790.00, 1);
-INSERT INTO `tb_xsth_detail` VALUES ('XT20051005002', 'sp1002', 890.00, 1);
-INSERT INTO `tb_xsth_detail` VALUES ('XT20051005003', 'sp1002', 890.00, 1);
-INSERT INTO `tb_xsth_detail` VALUES ('XT20051216001', 'sp1004', 790.00, 1);
-INSERT INTO `tb_xsth_detail` VALUES ('XT20071017001', 'sp1005', 432.00, 4830);
-INSERT INTO `tb_xsth_detail` VALUES ('XT20071017002', 'sp1005', 432.00, 9660);
-INSERT INTO `tb_xsth_detail` VALUES ('XT20071109001', 'sp1007', 10.00, 1);
-INSERT INTO `tb_xsth_detail` VALUES ('XT20080410001', 'sp1001', 151.00, -1000);
-INSERT INTO `tb_xsth_detail` VALUES ('XT20080521001', 'sp1007', 10.00, 1);
-
--- ----------------------------
--- Table structure for tb_xsth_main
--- ----------------------------
-DROP TABLE IF EXISTS `tb_xsth_main`;
-CREATE TABLE `tb_xsth_main`  (
-  `xsthID` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `pzs` int(11) NOT NULL,
-  `je` decimal(10, 2) NOT NULL,
-  `ysjl` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `khname` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `thdate` datetime(0) NOT NULL,
-  `czy` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `jsr` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `jsfs` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
+DROP TABLE IF EXISTS `tb_warehouse_return_main`;
+CREATE TABLE `tb_warehouse_return_main`  (
+  `id` bigint(20) NOT NULL COMMENT '进货退货编号',
+  `varieties_num` int(11) NOT NULL COMMENT '进货退货品种数目',
+  `total_money` decimal(10, 2) NOT NULL COMMENT '总计金额',
+  `acc_conclusion` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '验收结论',
+  `customer_id` bigint(20) NOT NULL COMMENT '客户id',
+  `sale_time` bigint(20) NOT NULL COMMENT '进货退货时间',
+  `operator_id` bigint(20) NOT NULL COMMENT '操作员id',
+  `handler_id` bigint(20) NOT NULL COMMENT '经手人id',
+  `trades_way` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '交易方式',
+  `create_time` bigint(20) NOT NULL COMMENT '创建时间',
+  `update_time` bigint(20) NOT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of tb_xsth_main
+-- Table structure for tb_warehouse_store_detail
 -- ----------------------------
-INSERT INTO `tb_xsth_main` VALUES ('XT20051005001', 1, 790.00, '0.00', '新*纪文化百货用品商城', '2005-10-05 13:17:31', 'admin', 'jh', '现金');
-INSERT INTO `tb_xsth_main` VALUES ('XT20051005002', 1, 890.00, '90.00', '新*纪文化百货用品商城', '2005-10-05 13:25:52', 'admin', 'hj', '现金');
-INSERT INTO `tb_xsth_main` VALUES ('XT20051005003', 1, 890.00, '0.00', '新*纪文化百货用品商城', '2005-10-05 13:32:38', 'admin', 'wgh', '现金');
-INSERT INTO `tb_xsth_main` VALUES ('XT20051216001', 1, 790.00, '90.00', '新*纪文化百货用品商城', '2005-12-16 17:24:46', 'admin', 'kk', '现金');
-INSERT INTO `tb_xsth_main` VALUES ('XT20071017001', 1, 2086560.00, '432', '明日科技有限公司', '2007-10-17 08:50:05', '测试人员', '432', '现金');
-INSERT INTO `tb_xsth_main` VALUES ('XT20071017002', 1, 4173120.00, '432', '明日科技有限公司', '2007-10-17 08:50:12', '测试人员', '432', '现金');
-INSERT INTO `tb_xsth_main` VALUES ('XT20071109001', 1, 10.00, '不合格', '明日科技有限公司', '2007-11-09 14:42:12', 'mr', '99', '现金');
-INSERT INTO `tb_xsth_main` VALUES ('XT20080410001', 1, -151000.00, '321', '明日科技有限公司', '2008-04-10 10:34:27', 'tsoft', '范德萨', '现金');
-INSERT INTO `tb_xsth_main` VALUES ('XT20080521001', 1, 10.00, '10', '明日科技有限公司', '2008-05-21 14:58:18', 'tsoft', '范德萨', '现金');
+DROP TABLE IF EXISTS `tb_warehouse_store_detail`;
+CREATE TABLE `tb_warehouse_store_detail`  (
+  `id` bigint(20) NOT NULL COMMENT '入库流水号',
+  `goods_id` bigint(20) NOT NULL COMMENT '商品id',
+  `unit_price` decimal(10, 2) NOT NULL COMMENT '进价',
+  `unit` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '价格单位',
+  `store_number` int(11) NOT NULL COMMENT '入库数量',
+  `create_time` bigint(20) NOT NULL COMMENT '创建时间',
+  `update_time` bigint(20) NOT NULL COMMENT '更新时间',
+  `main_id` bigint(20) NOT NULL COMMENT '关联主表id',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `goodsid2`(`goods_id`) USING BTREE,
+  CONSTRAINT `goodsid2` FOREIGN KEY (`goods_id`) REFERENCES `tb_goods_info` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for tb_warehouse_store_main
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_warehouse_store_main`;
+CREATE TABLE `tb_warehouse_store_main`  (
+  `id` bigint(20) NOT NULL COMMENT '主键ID',
+  `varieties_num` int(11) NOT NULL COMMENT '品种数量',
+  `total_money` decimal(10, 2) NOT NULL COMMENT '总计金额',
+  `acc_conclusion` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '验收结论',
+  `customer_id` bigint(20) NOT NULL COMMENT '客户id',
+  `return_time` bigint(20) NOT NULL COMMENT '退货日期',
+  `operator_id` bigint(20) NOT NULL COMMENT '操作员',
+  `handler_id` bigint(20) NOT NULL COMMENT '经手人',
+  `trades_way` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '结算方式',
+  `create_time` bigint(20) NOT NULL COMMENT '创建时间',
+  `update_time` bigint(20) NOT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- View structure for v_rukuview

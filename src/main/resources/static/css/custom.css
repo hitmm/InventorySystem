@@ -1,7 +1,7 @@
 /* your styles go here */
-.headportrait{
-    width: 100px;
-    height: 100px;
+.headportrait {
+    width: 150px;
+    height: 150px;
     display: block;
-    background-size: 100px auto;
+    background-size: 150px auto;
 }

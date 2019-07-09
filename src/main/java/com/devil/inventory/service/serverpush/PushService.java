@@ -23,7 +23,7 @@ import java.util.List;
  */
 @Component
 @Data
-public class PushService implements IPushService{
+public class PushService implements IPushService {
     private final static Logger logger = LoggerFactory.getLogger(PushService.class);
 
     @Autowired
@@ -36,20 +36,20 @@ public class PushService implements IPushService{
             logger.info(String.format("push start....PushMessage : %s.", JSONObject.toJSONString(message)));
             List<NioSocketChannel> livingClients = HeartBeatHolder.getLivingClient();
             logger.info(String.format("livingClients : %s.", JSONObject.toJSONString(livingClients)));
-            if(livingClients.isEmpty()){
+            if (livingClients.isEmpty()) {
                 return;
             }
-            for (Channel channel : livingClients){
-                InetSocketAddress insocket = (InetSocketAddress)channel.remoteAddress();
+            for (Channel channel : livingClients) {
+                InetSocketAddress insocket = (InetSocketAddress) channel.remoteAddress();
                 String clientIP = insocket.getAddress().getHostAddress();
                 boolean filter = this.filter.filter(clientIP);
-                if(filter){
+                if (filter) {
                     channel.writeAndFlush(message);
                 }
             }
         } catch (Exception e) {
-            logger.warn(String.format("Exception : %s.",e.getMessage()),e);
-        }finally {
+            logger.warn(String.format("Exception : %s.", e.getMessage()), e);
+        } finally {
             logger.info(String.format("push END ,cost : %s.", TimeUtil.getInterval(start)));
         }
     }

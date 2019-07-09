@@ -15,19 +15,21 @@ public interface IUserInfoService {
 
     /**
      * 查询用户信息
+     *
      * @param id 用户id
      * @return
      * @throws Exception
      */
-    UserInfoEntity queryUserInfo(Long id)throws Exception;
+    UserInfoEntity queryUserInfo(Long id) throws Exception;
 
     /**
      * 查询用户信息
+     *
      * @param sql 自定义sql
      * @return
      * @throws Exception
      */
-    List<UserInfoEntity> queryUserInfoCustom(String sql, Object[] params)throws Exception;
+    List<UserInfoEntity> queryUserInfoCustom(String sql, Object[] params) throws Exception;
 
     /**
      * 查询用户信息
@@ -40,18 +42,20 @@ public interface IUserInfoService {
 
     /**
      * 计数
+     *
      * @return
      * @throws Exception
      */
-    Integer countUserInfo()throws Exception;
+    Integer countUserInfo() throws Exception;
 
     /**
      * 新增用户
+     *
      * @param entity
      * @return
      * @throws Exception
      */
-    Long insertUserInfo(UserInfoEntity entity)throws Exception;
+    Long insertUserInfo(UserInfoEntity entity) throws Exception;
 
     /**
      * 新增或更新用户信息
@@ -64,16 +68,18 @@ public interface IUserInfoService {
 
     /**
      * 更新用户信息
+     *
      * @param entity
      * @return
      * @throws Exception
      */
-    Long updateUserInfo(UserInfoEntity entity)throws Exception;
+    Long updateUserInfo(UserInfoEntity entity) throws Exception;
 
     /**
      * 删除用户
+     *
      * @param id
      * @throws Exception
      */
-    void deleteUserInfo(Long id)throws Exception;
+    void deleteUserInfo(Long id) throws Exception;
 }

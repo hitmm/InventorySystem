@@ -11,7 +11,7 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "table_info", schema = "report")
-public class TableInfoEntity implements IEntity{
+public class TableInfoEntity implements IEntity {
     private long id;
     private String tableName;
     private String tableAlias;

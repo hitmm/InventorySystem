@@ -22,11 +22,11 @@ public class HeartBeatChannelHandler extends SimpleChannelInboundHandler<HeartBe
 
     @Override
     protected void channelRead0(ChannelHandlerContext context, HeartBeatMessage bean) throws Exception {
-        if(bean==null){
+        if (bean == null) {
             LOGGER.info("ERROR HeartBeatBean");
             return;
         }
-        LOGGER.info(String.format("Client(%s) send heartBeat...remoteIp:%s.",bean.getClientId(),bean.getIp()));
+        LOGGER.info(String.format("Client(%s) send heartBeat...remoteIp:%s.", bean.getClientId(), bean.getIp()));
         HeartBeatHolder.putOrFreshClientByIp(bean.getIp(), (NioSocketChannel) context.channel());
     }
 
@@ -34,9 +34,9 @@ public class HeartBeatChannelHandler extends SimpleChannelInboundHandler<HeartBe
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         InetSocketAddress insocket = (InetSocketAddress) ctx.channel().remoteAddress();
         String clientIP = insocket.getAddress().getHostAddress();
-        LOGGER.info(String.format("********************************new Client connected....remoteIp:%s.",clientIP));
+        LOGGER.info(String.format("********************************new Client connected....remoteIp:%s.", clientIP));
         String clientId = HeartBeatHolder.getIdentByIp(clientIP);
-        if(StringUtils.isEmpty(clientId)){
+        if (StringUtils.isEmpty(clientId)) {
             //新生成id
             clientId = UUIDUtils.generateId();
         }
@@ -64,7 +64,7 @@ public class HeartBeatChannelHandler extends SimpleChannelInboundHandler<HeartBe
             InetSocketAddress insocket = (InetSocketAddress) ctx.channel().remoteAddress();
             String clientIP = insocket.getAddress().getHostAddress();
             if (idleStateEvent.state() == IdleState.READER_IDLE) {
-                LOGGER.info(String.format("No information has been received for some seconds,we will disconnected.remoteIp : %s.",clientIP));
+                LOGGER.info(String.format("No information has been received for some seconds,we will disconnected.remoteIp : %s.", clientIP));
                 //向客户端发送消息
                 HeartBeatMessage bean = new HeartBeatMessage();
                 String ident = HeartBeatHolder.getIdentByIp(clientIP);

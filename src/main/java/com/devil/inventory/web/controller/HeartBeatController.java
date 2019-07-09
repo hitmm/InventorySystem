@@ -23,11 +23,11 @@ public class HeartBeatController {
     private RedisClient redisClient;
 
     @GetMapping("/heartBeat/{ip}")
-    public String beating(@PathVariable(value = "ip")String ip){
+    public String beating(@PathVariable(value = "ip") String ip) {
         System.out.println(ip);
         Jedis jedisClient = redisClient.getJedisClient();
-        String result = jedisClient.getSet(ip,""+ TimeUtil.getCurrentTime());
-        logger.info(String.format("beating result : %s.",result));
+        String result = jedisClient.getSet(ip, "" + TimeUtil.getCurrentTime());
+        logger.info(String.format("beating result : %s.", result));
         return result;
     }
 }

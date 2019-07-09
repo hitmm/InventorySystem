@@ -13,6 +13,85 @@ import static lombok.Lombok.checkNotNull;
 public abstract class BaseRedisClient implements IRedisClient, IBinaryRedisClient {
     protected final Logger log = LoggerFactory.getLogger(this.getClass());
 
+    protected static List<byte[]> serializeStriArray(Collection<String> array) {
+        List<byte[]> values = new ArrayList<byte[]>();
+
+        if (array == null || array.size() <= 0) {
+            return values;
+        }
+
+        for (String str : array) {
+
+            values.add(SerializeUtil.serializeString(str));
+        }
+
+        return values;
+    }
+
+    protected static Map<byte[], byte[]> serializeMap(Map<String, Object> map) throws Exception {
+        Map<byte[], byte[]> result = null;
+        if (map == null) {
+            return result;
+        }
+        result = new HashMap<byte[], byte[]>();
+
+        String key;
+        Object value;
+        byte[] keyBytes;
+        byte[] valueBytes;
+        for (Map.Entry<String, Object> entry : map.entrySet()) {
+
+            key = entry.getKey();
+            value = entry.getValue();
+
+            keyBytes = SerializeUtil.serializeString(key);
+            valueBytes = SerializeUtil.serialize(value);
+
+            if (valueBytes == null) {
+                continue;
+            }
+
+            result.put(keyBytes, valueBytes);
+
+        }
+
+        return result;
+    }
+
+    protected static Map<String, Object> unserizlizeMap(Map<byte[], byte[]> map) throws Exception {
+        Map<String, Object> result = null;
+
+        if (map == null) {
+            return result;
+        }
+        result = new HashMap<String, Object>();
+
+        byte[] keyBytes;
+        byte[] valueBytes;
+
+        String key;
+        Object value;
+        for (Map.Entry<byte[], byte[]> entry : map.entrySet()) {
+            if (entry == null) {
+                continue;
+            }
+            keyBytes = entry.getKey();
+            valueBytes = entry.getValue();
+
+            if (keyBytes == null || valueBytes == null) {
+                continue;
+            }
+
+            key = SerializeUtil.unserializeString(keyBytes);
+            value = SerializeUtil.unserialize(valueBytes);
+
+            result.put(key, value);
+        }
+
+
+        return result;
+    }
+
     @Override
     public boolean exists(String key) {
         checkNotNull(key, EXCEPTION_KEY_NULL);
@@ -88,7 +167,6 @@ public abstract class BaseRedisClient implements IRedisClient, IBinaryRedisClien
         }
         return result;
     }
-
 
     @Override
     public void set(String key, Object value) throws Exception {
@@ -384,7 +462,6 @@ public abstract class BaseRedisClient implements IRedisClient, IBinaryRedisClien
         return result;
     }
 
-
     @Override
     public void sadd(String key, Object member) throws Exception {
         long start = getCurrentTime();
@@ -415,88 +492,6 @@ public abstract class BaseRedisClient implements IRedisClient, IBinaryRedisClien
         } finally {
             log.debug("Key:[" + key + "], Cost:[" + getInterval(start) + "]ms");
         }
-
-        return result;
-    }
-
-
-
-    protected static List<byte[]> serializeStriArray(Collection<String> array) {
-        List<byte[]> values = new ArrayList<byte[]>();
-
-        if (array == null || array.size() <= 0) {
-            return values;
-        }
-
-        for (String str : array) {
-
-            values.add(SerializeUtil.serializeString(str));
-        }
-
-        return values;
-    }
-
-    protected static Map<byte[], byte[]> serializeMap(Map<String, Object> map) throws Exception {
-        Map<byte[], byte[]> result = null;
-        if (map == null) {
-            return result;
-        }
-        result = new HashMap<byte[], byte[]>();
-
-        String key;
-        Object value;
-        byte[] keyBytes;
-        byte[] valueBytes;
-        for (Map.Entry<String, Object> entry : map.entrySet()) {
-
-            key = entry.getKey();
-            value = entry.getValue();
-
-            keyBytes = SerializeUtil.serializeString(key);
-            valueBytes = SerializeUtil.serialize(value);
-
-            if (valueBytes == null) {
-                continue;
-            }
-
-            result.put(keyBytes, valueBytes);
-
-        }
-
-        return result;
-    }
-
-
-    protected static Map<String, Object> unserizlizeMap(Map<byte[], byte[]> map) throws Exception {
-        Map<String, Object> result = null;
-
-        if (map == null) {
-            return result;
-        }
-        result = new HashMap<String, Object>();
-
-        byte[] keyBytes;
-        byte[] valueBytes;
-
-        String key;
-        Object value;
-        for (Map.Entry<byte[], byte[]> entry : map.entrySet()) {
-            if (entry == null) {
-                continue;
-            }
-            keyBytes = entry.getKey();
-            valueBytes = entry.getValue();
-
-            if (keyBytes == null || valueBytes == null) {
-                continue;
-            }
-
-            key = SerializeUtil.unserializeString(keyBytes);
-            value = SerializeUtil.unserialize(valueBytes);
-
-            result.put(key, value);
-        }
-
 
         return result;
     }

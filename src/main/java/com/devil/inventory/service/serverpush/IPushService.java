@@ -11,8 +11,9 @@ import com.devil.inventory.model.service.message.PushMessage;
 public interface IPushService {
     /**
      * 向在线用户推送消息
+     *
      * @param message
      * @throws Exception
      */
-    void push(PushMessage message)throws Exception;
+    void push(PushMessage message) throws Exception;
 }

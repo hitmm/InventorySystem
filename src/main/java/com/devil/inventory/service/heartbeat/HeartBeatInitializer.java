@@ -15,7 +15,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class HeartBeatInitializer extends ChannelInitializer<Channel> {
     private final static ClassLoaderResolver classLoaderClassResolver = new ClassLoaderResolver(HeartBeatInitializer.class.getClassLoader());
     private final static Map<String, Class<?>> classCache = new ConcurrentHashMap<>();
-    private final static CachingClassResolver cachingClassResolver = new CachingClassResolver(classLoaderClassResolver,classCache);
+    private final static CachingClassResolver cachingClassResolver = new CachingClassResolver(classLoaderClassResolver, classCache);
 
     @Value("${spring.heartbeat.reader.idletime}")
     private int readerIdleTimeSeconds;
@@ -27,7 +27,7 @@ public class HeartBeatInitializer extends ChannelInitializer<Channel> {
 
     @Override
     protected void initChannel(Channel channel) throws Exception {
-        System.out.println("readerIdleTimeSeconds"+readerIdleTimeSeconds);
+        System.out.println("readerIdleTimeSeconds" + readerIdleTimeSeconds);
         channel.pipeline()
                 //五秒没有收到消息 将IdleStateHandler 添加到 ChannelPipeline 中
                 .addLast(new IdleStateHandler(5, 0, 0))

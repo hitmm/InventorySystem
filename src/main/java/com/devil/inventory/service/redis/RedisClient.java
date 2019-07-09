@@ -14,33 +14,33 @@ import redis.clients.jedis.Jedis;
  */
 @Service
 public class RedisClient {
-    private static final Logger log= LoggerFactory.getLogger(RedisClient.class);
+    private static final Logger log = LoggerFactory.getLogger(RedisClient.class);
 
     @Autowired
     private RedisConfig jedisClusterConfig;
 
-    public Jedis getJedisClient(){
+    public Jedis getJedisClient() {
         return jedisClusterConfig.getJedisClient();
     }
 
-    public boolean setToRedis(String key,Object value){
+    public boolean setToRedis(String key, Object value) {
         try {
-            String str= getJedisClient().set(key, String.valueOf(value));
-            if("OK".equals(str)) {
+            String str = getJedisClient().set(key, String.valueOf(value));
+            if ("OK".equals(str)) {
                 return true;
             }
-        }catch (Exception ex){
-            log.error("setToRedis:{Key:"+key+",value"+value+"}",ex);
+        } catch (Exception ex) {
+            log.error("setToRedis:{Key:" + key + ",value" + value + "}", ex);
         }
         return false;
     }
 
-    public Object getRedis(String key){
-        String str=null;
+    public Object getRedis(String key) {
+        String str = null;
         try {
-            str= getJedisClient().get(key);
-        }catch (Exception ex){
-            log.error("getRedis:{Key:"+key+"}",ex);
+            str = getJedisClient().get(key);
+        } catch (Exception ex) {
+            log.error("getRedis:{Key:" + key + "}", ex);
         }
         return str;
     }

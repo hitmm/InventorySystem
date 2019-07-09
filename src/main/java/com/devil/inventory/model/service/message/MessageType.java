@@ -11,13 +11,13 @@ public enum MessageType {
     /**
      *
      */
-    CONNECT_REQ((short)1,"CONNECT_REQ"), CONNECT_SUCCESS((short)2,"CONNECT_SUCCESS"), CONNECT_FAIL((short)3,"CONNECT_FAIL"),
-    HEARTBEAT_REQ((short)4,"HEARTBEAT_REQ"), HEARTBEAT_RESP((short)5,"HEARTBEAT_RESP"), MSG_PUSH((short)6,"MSG_PUSH");
+    CONNECT_REQ((short) 1, "CONNECT_REQ"), CONNECT_SUCCESS((short) 2, "CONNECT_SUCCESS"), CONNECT_FAIL((short) 3, "CONNECT_FAIL"),
+    HEARTBEAT_REQ((short) 4, "HEARTBEAT_REQ"), HEARTBEAT_RESP((short) 5, "HEARTBEAT_RESP"), MSG_PUSH((short) 6, "MSG_PUSH");
 
     private short code;
     private String message;
 
-    private MessageType(short code,String message){
+    private MessageType(short code, String message) {
         this.code = code;
         this.message = message;
     }

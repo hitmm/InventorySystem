@@ -4,7 +4,7 @@ import io.netty.handler.codec.serialization.ClassResolver;
 
 import java.util.Map;
 
-public class CachingClassResolver implements ClassResolver{
+public class CachingClassResolver implements ClassResolver {
 
     private final Map<String, Class<?>> classCache;
     private final ClassResolver delegate;

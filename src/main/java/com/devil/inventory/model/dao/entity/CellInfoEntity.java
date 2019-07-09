@@ -11,7 +11,7 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "cell_info", schema = "report")
-public class CellInfoEntity implements IEntity{
+public class CellInfoEntity implements IEntity {
     private long id;
     private long rowId;
     private long colId;

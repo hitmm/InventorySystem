@@ -26,6 +26,11 @@ public class UserInfoServiceImpl implements IUserInfoService {
         this.userInfoDAO = userInfoDAO;
     }
 
+    public static void main(String[] args) throws Exception {
+        UserInfoEntity userInfoEntity = new UserInfoServiceImpl(new UserInfoDAO()).queryUserInfo(1212L);
+        System.out.println(JSONObject.toJSONString(userInfoEntity));
+    }
+
     @Override
     public UserInfoEntity queryUserInfo(Long id) throws Exception {
         return userInfoDAO.queryUserInfoById(id);
@@ -33,7 +38,7 @@ public class UserInfoServiceImpl implements IUserInfoService {
 
     @Override
     public List<UserInfoEntity> queryUserInfoCustom(String hql, Object[] params) throws Exception {
-        return userInfoDAO.queryUserInfoCustom(hql,params);
+        return userInfoDAO.queryUserInfoCustom(hql, params);
     }
 
     @Override
@@ -66,10 +71,6 @@ public class UserInfoServiceImpl implements IUserInfoService {
         userInfoDAO.deleteUserInfo(id);
     }
 
-    public static void main(String[] args) throws Exception {
-        UserInfoEntity userInfoEntity = new UserInfoServiceImpl(new UserInfoDAO()).queryUserInfo(1212L);
-        System.out.println(JSONObject.toJSONString(userInfoEntity));
-    }
     public void setUserInfoDAO(UserInfoDAO userInfoDAO) {
         this.userInfoDAO = userInfoDAO;
     }

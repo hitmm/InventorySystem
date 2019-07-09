@@ -11,7 +11,7 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "reference_info", schema = "report")
-public class ReferenceInfoEntity implements IEntity{
+public class ReferenceInfoEntity implements IEntity {
     private long id;
     private String referenceName;
     private String referenceAlias;

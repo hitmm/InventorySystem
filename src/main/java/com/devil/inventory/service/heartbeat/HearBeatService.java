@@ -16,7 +16,7 @@ import javax.annotation.PreDestroy;
 import java.net.InetSocketAddress;
 
 @Component
-public class HearBeatService implements IHeartBeatService{
+public class HearBeatService implements IHeartBeatService {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(HearBeatService.class);
     private EventLoopGroup boss = new NioEventLoopGroup(); //(1)
@@ -25,14 +25,14 @@ public class HearBeatService implements IHeartBeatService{
     @Value("${spring.heartbeat.port}")
     private int nettyPort;
 
-    public IHeartBeatService getInstance(){
+    public IHeartBeatService getInstance() {
         return Singleton.INSTANCE;
     }
 
     @Override
     @PostConstruct
     public void start() throws Exception {
-        LOGGER.info("heartbeat service starting......port:"+nettyPort);
+        LOGGER.info("heartbeat service starting......port:" + nettyPort);
         ServerBootstrap bootstrap = new ServerBootstrap() //(2)
                 .group(boss, work)
                 .channel(NioServerSocketChannel.class)// (3)

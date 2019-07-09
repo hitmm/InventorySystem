@@ -48,13 +48,13 @@ public class UserInfoDAO extends BaseDAO implements IUserInfoDAO {
 
     @Override
     public UserInfoEntity queryUserInfoById(Long id) throws Exception {
-        return query(id,UserInfoEntity.class);
+        return query(id, UserInfoEntity.class);
     }
 
     @Override
     public UserInfoEntity queryUserInfoByName(String userName) throws Exception {
         List<UserInfoEntity> resultTmp = query(QUERY_NAME_HQL, new Object[]{userName});
-        if(resultTmp==null||resultTmp.isEmpty()){
+        if (resultTmp == null || resultTmp.isEmpty()) {
             return null;
         }
         return resultTmp.get(0);
@@ -68,7 +68,7 @@ public class UserInfoDAO extends BaseDAO implements IUserInfoDAO {
 
     @Override
     public List<UserInfoEntity> queryUserInfoCustom(String sql, Object[] params) throws Exception {
-        return nativeQuery(sql,params,UserInfoEntity.class);
+        return nativeQuery(sql, params, UserInfoEntity.class);
     }
 
 }

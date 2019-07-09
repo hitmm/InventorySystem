@@ -10,9 +10,10 @@ public interface IPushFilter {
 
     /**
      * 根据ip过滤
+     *
      * @param ip
      * @return
      * @throws Exception
      */
-    boolean filter(String ip)throws Exception;
+    boolean filter(String ip) throws Exception;
 }

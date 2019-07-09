@@ -233,10 +233,10 @@
             </ul>
             <#--<span class="heading">Extras</span>-->
             <#--<ul class="list-unstyled">-->
-                <#--<li><a href="#"> <i class="icon-flask"></i>Demo </a></li>-->
-                <#--<li><a href="#"> <i class="icon-screen"></i>Demo </a></li>-->
-                <#--<li><a href="#"> <i class="icon-mail"></i>Demo </a></li>-->
-                <#--<li><a href="#"> <i class="icon-picture"></i>Demo </a></li>-->
+            <#--<li><a href="#"> <i class="icon-flask"></i>Demo </a></li>-->
+            <#--<li><a href="#"> <i class="icon-screen"></i>Demo </a></li>-->
+            <#--<li><a href="#"> <i class="icon-mail"></i>Demo </a></li>-->
+            <#--<li><a href="#"> <i class="icon-picture"></i>Demo </a></li>-->
             <#--</ul>-->
         </nav>
         <div class="content-inner">

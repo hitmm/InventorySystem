@@ -11,7 +11,7 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "user_info", schema = "report")
-public class UserInfoEntity implements IEntity{
+public class UserInfoEntity implements IEntity {
     private long id;
     private String userName;
     private String password;

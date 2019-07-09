@@ -36,7 +36,7 @@ public class ApplicationInit implements ApplicationContextInitializer {
             try {
                 hearBeatService.start();
             } catch (Exception e) {
-                logger.warn(String.format("Exception : %s.",e.getMessage()),e);
+                logger.warn(String.format("Exception : %s.", e.getMessage()), e);
                 hearBeatService.stop();
             }
             logger.info("##################################ReportServerApplication init End ....");

@@ -34,28 +34,29 @@ public class LoginController {
         logger.info(String.format("result : %s.", JSONObject.toJSONString(result)));
         return result;
     }
+
     @RequestMapping(value = "/login")
-    public String login(){
+    public String login() {
         return "views/login";
     }
 
-    @RequestMapping(value = "/index",method=RequestMethod.POST)
-    public ModelAndView onLogin(@RequestParam(name = "userName", required = true)  String userName,
-                                @RequestParam(name = "password", required = true)String password,
+    @RequestMapping(value = "/index", method = RequestMethod.POST)
+    public ModelAndView onLogin(@RequestParam(name = "userName", required = true) String userName,
+                                @RequestParam(name = "password", required = true) String password,
                                 HttpServletRequest request) throws Exception {
         logger.info(userName);
-        logger.info(String.format("request : %s.",request.getSession()));
+        logger.info(String.format("request : %s.", request.getSession()));
         ModelAndView mv = new ModelAndView("views/index");
         ModelAndView mv2 = new ModelAndView("#");
         HttpSession session = request.getSession();
         LoginResult result = loginService.login(userName, password);
         mv.addObject("userInfo", result.getEntity());
-        session.setAttribute("userInfo",result.getEntity());
+        session.setAttribute("userInfo", result.getEntity());
 
-        if (result.getCode()==0) {
+        if (result.getCode() == 0) {
             return mv;
         }
-        return  mv2;
+        return mv2;
 
     }
 }

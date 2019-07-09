@@ -2,7 +2,7 @@ package com.devil.inventory.service.heartbeat;
 
 import io.netty.handler.codec.serialization.ClassResolver;
 
-public class ClassLoaderResolver implements ClassResolver{
+public class ClassLoaderResolver implements ClassResolver {
 
     private final ClassLoader classLoader;
 
