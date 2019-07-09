@@ -20,7 +20,7 @@ public class HeadPortraitController {
         HttpSession session = request.getSession();
         UserInfoEntity userInfo = (UserInfoEntity) session.getAttribute("userInfo");
         long id = userInfo.getId();
-        String imagePath = String.format("%s/%s/headProtrait.jpg", imageWarehousePath, id);
+        String imagePath = String.format("%s\\%s\\headProtrait.jpg", imageWarehousePath, id);
         System.out.println("image:  " + imagePath);
         ImgUtils.queryPic(imagePath, response);
     }

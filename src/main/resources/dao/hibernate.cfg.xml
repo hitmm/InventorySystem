@@ -13,15 +13,27 @@
         <property name="hibernate.show_sql">true</property>
         <!-- 是否对日志中输出的sql语句进行格式化 -->
         <property name="hibernate.format_sql">true</property>
-        <property name="connection.url">jdbc:mysql://localhost:3306/report?useUnicode=true&amp;characterEncoding=UTF-8&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/inventory?useUnicode=true&amp;characterEncoding=utf8&amp;useSSL=false&amp;serverTimezone=UTC</property>
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password">root</property>
         <!--关闭自动建表-->
         <property name="hibernate.hbm2ddl.auto">update</property>
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
         <mapping class="com.devil.inventory.model.dao.entity.UserInfoEntity"/>
-        <mapping class="com.devil.inventory.model.dao.entity.CellInfoEntity"/>
-        <mapping class="com.devil.inventory.model.dao.entity.TableInfoEntity"/>
-        <mapping class="com.devil.inventory.model.dao.entity.ReferenceInfoEntity"/>
+        <mapping class="com.devil.inventory.model.dao.entity.CompanyInfoEntity"/>
+        <mapping class="com.devil.inventory.model.dao.entity.CustomerInfoEntity"/>
+        <mapping class="com.devil.inventory.model.dao.entity.GoodsInfoEntity"/>
+        <mapping class="com.devil.inventory.model.dao.entity.HandlerEntity"/>
+        <mapping class="com.devil.inventory.model.dao.entity.SalesReturnDetailEntity"/>
+        <mapping class="com.devil.inventory.model.dao.entity.SalesReturnMainEntity"/>
+        <mapping class="com.devil.inventory.model.dao.entity.SellDetailEntity"/>
+        <mapping class="com.devil.inventory.model.dao.entity.SellMainEntity"/>
+        <mapping class="com.devil.inventory.model.dao.entity.StockEntity"/>
+        <mapping class="com.devil.inventory.model.dao.entity.SupplierInfoEntity"/>
+        <mapping class="com.devil.inventory.model.dao.entity.WarehouseReturnDetailEntity"/>
+        <mapping class="com.devil.inventory.model.dao.entity.WarehouseReturnMainEntity"/>
+        <mapping class="com.devil.inventory.model.dao.entity.WarehouseStoreDetailEntity"/>
+        <mapping class="com.devil.inventory.model.dao.entity.WarehouseStoreMainEntity"/>
 
         <!-- 加载映射文件 -->
         <!--        <mapping resource="com/xiaowen/userInfoEntity/Customer.hbm.xml"/>-->

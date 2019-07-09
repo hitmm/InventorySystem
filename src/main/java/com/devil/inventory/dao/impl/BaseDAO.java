@@ -1,7 +1,6 @@
 package com.devil.inventory.dao.impl;
 
 import com.alibaba.fastjson.JSONObject;
-import com.devil.inventory.model.dao.entity.IEntity;
 import com.devil.inventory.model.dao.entity.UserInfoEntity;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -96,21 +95,6 @@ public class BaseDAO {
         Transaction trans = session.beginTransaction();
         trans.begin();
         Long id = (Long) session.save(t);
-        trans.commit();
-        return id;
-    }
-
-    protected <T> Long saveOrUpdate(IEntity t) { //启动事务1
-        sessionFactory = config.buildSessionFactory();
-        session = sessionFactory.openSession();
-        Transaction trans = session.beginTransaction();
-        trans.begin();
-        Long id = t.getIdent();
-        if (id == null) {
-            id = (Long) session.save(t);
-        } else {
-            session.update(t);
-        }
         trans.commit();
         return id;
     }

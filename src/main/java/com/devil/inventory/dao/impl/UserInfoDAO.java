@@ -33,12 +33,16 @@ public class UserInfoDAO extends BaseDAO implements IUserInfoDAO {
 
     @Override
     public Long updateOrInsertUserInfo(UserInfoEntity entity) throws Exception {
-        return saveOrUpdate(entity);
+        if(entity.getId()!=null&&entity.getId()>0){
+            return updateUserInfo(entity);
+        }
+        return insertUserInfo(entity);
     }
 
     @Override
     public Long updateUserInfo(UserInfoEntity entity) throws Exception {
-        return updateUserInfo(entity);
+        update(entity);
+        return entity.getId();
     }
 
     @Override

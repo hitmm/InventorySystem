@@ -43,7 +43,7 @@
                     <!-- Navbar Header-->
                     <div class="navbar-header">
 
-                        <!-- Navbar Brand --><a href="#" onclick="index(${userInfo.userName},${userInfo.password})"
+                        <!-- Navbar Brand --><a href="#" onclick="index(${userInfo.username},${userInfo.password})"
                                                 class="navbar-brand d-none d-sm-inline-block">
                             <div class="brand-text d-none d-lg-inline-block"><strong>企业进销存管理系统</strong></div>
                             <div class="brand-text d-none d-sm-inline-block d-lg-none"><strong>BD</strong></div>
@@ -170,7 +170,7 @@
                 <div class="avatar"><img src="/img/headProtrait" alt="..."
                                          class="/static/img-fluid rounded-circle headportrait"></div>
                 <div class="title">
-                    <h1 class="h4">${userInfo.userName}</h1>
+                    <h1 class="h4">${userInfo.username}</h1>
                     <p>Web Designer</p>
                 </div>
             </div>
