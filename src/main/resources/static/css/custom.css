@@ -1,7 +1,12 @@
 /* your styles go here */
 .headportrait {
-    width: 150px;
-    height: 150px;
+    width: 120px;
+    height: 120px;
     display: block;
-    background-size: 150px auto;
+    background-size: 120px auto;
+}
+
+.title1{
+    text-align: right;
+    float:right;
 }
