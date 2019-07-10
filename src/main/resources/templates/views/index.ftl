@@ -166,7 +166,7 @@
         <!-- Side Navbar -->
         <nav class="side-navbar">
             <!-- Sidebar Header-->
-            <div class="sidebar-header headtitle align-items-center">
+            <div class="sidebar-header d-flex align-items-center">
                 <div class="avatar"><img src="/img/headProtrait" alt="..."
                                          class="/static/img-fluid rounded-circle headportrait"></div>
                 <div class="title">

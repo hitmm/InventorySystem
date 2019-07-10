@@ -22,7 +22,7 @@ public class SellMainEntity {
     private Long createTime;
     private Long updateTime;
     private CustomerInfoEntity tbCustomerInfoByCustomerId;
-    private HandlerEntity tbHandlerByHandlerId;
+    private HandlerInfoEntity tbHandlerByHandlerId;
 
     @Id
     @Column(name = "id")
@@ -136,11 +136,11 @@ public class SellMainEntity {
 
     @ManyToOne
     @JoinColumn(name = "handler_id", referencedColumnName = "id", nullable = false)
-    public HandlerEntity getTbHandlerByHandlerId() {
+    public HandlerInfoEntity getTbHandlerByHandlerId() {
         return tbHandlerByHandlerId;
     }
 
-    public void setTbHandlerByHandlerId(HandlerEntity tbHandlerByHandlerId) {
+    public void setTbHandlerByHandlerId(HandlerInfoEntity tbHandlerByHandlerId) {
         this.tbHandlerByHandlerId = tbHandlerByHandlerId;
     }
 }

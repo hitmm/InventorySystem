@@ -10,8 +10,8 @@ import java.util.Objects;
  *  
  */
 @Entity
-@Table(name = "tb_stock", schema = "inventory")
-public class StockEntity {
+@Table(name = "tb_stock_info", schema = "inventory")
+public class StockInfoEntity {
     private String id;
     private String goodsId;
     private Integer storageCapacity;
@@ -72,7 +72,7 @@ public class StockEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        StockEntity that = (StockEntity) o;
+        StockInfoEntity that = (StockInfoEntity) o;
         return Objects.equals(id, that.id) &&
                 Objects.equals(goodsId, that.goodsId) &&
                 Objects.equals(storageCapacity, that.storageCapacity) &&

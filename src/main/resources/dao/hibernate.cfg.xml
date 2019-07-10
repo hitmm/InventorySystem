@@ -23,12 +23,12 @@
         <mapping class="com.devil.inventory.model.dao.entity.CompanyInfoEntity"/>
         <mapping class="com.devil.inventory.model.dao.entity.CustomerInfoEntity"/>
         <mapping class="com.devil.inventory.model.dao.entity.GoodsInfoEntity"/>
-        <mapping class="com.devil.inventory.model.dao.entity.HandlerEntity"/>
+        <mapping class="com.devil.inventory.model.dao.entity.HandlerInfoEntity"/>
         <mapping class="com.devil.inventory.model.dao.entity.SalesReturnDetailEntity"/>
         <mapping class="com.devil.inventory.model.dao.entity.SalesReturnMainEntity"/>
         <mapping class="com.devil.inventory.model.dao.entity.SellDetailEntity"/>
         <mapping class="com.devil.inventory.model.dao.entity.SellMainEntity"/>
-        <mapping class="com.devil.inventory.model.dao.entity.StockEntity"/>
+        <mapping class="com.devil.inventory.model.dao.entity.StockInfoEntity"/>
         <mapping class="com.devil.inventory.model.dao.entity.SupplierInfoEntity"/>
         <mapping class="com.devil.inventory.model.dao.entity.WarehouseReturnDetailEntity"/>
         <mapping class="com.devil.inventory.model.dao.entity.WarehouseReturnMainEntity"/>

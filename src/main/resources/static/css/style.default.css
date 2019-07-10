@@ -435,7 +435,7 @@ nav.side-navbar a i {
 }
 
 nav.side-navbar .sidebar-header {
-    padding: 30px 15px;
+    padding: 30px 10px;
 }
 
 nav.side-navbar .avatar {
@@ -464,6 +464,7 @@ nav.side-navbar span.heading {
     margin-left: 20px;
     color: #ccc;
     font-size: 0.8em;
+    background-color: #796aee;
 }
 
 nav.side-navbar ul {
@@ -588,6 +589,7 @@ nav.side-navbar.shrinked .sidebar-header .title {
 
     nav.side-navbar span.heading {
         margin: 0;
+        background-color: #796aee;
     }
 
     nav.side-navbar ul li a {

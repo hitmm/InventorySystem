@@ -10,8 +10,8 @@ import java.util.Objects;
  *  
  */
 @Entity
-@Table(name = "tb_handler", schema = "inventory")
-public class HandlerEntity {
+@Table(name = "tb_handler_info", schema = "inventory")
+public class HandlerInfoEntity {
     private Long id;
     private String name;
     private String sex;
@@ -84,7 +84,7 @@ public class HandlerEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        HandlerEntity that = (HandlerEntity) o;
+        HandlerInfoEntity that = (HandlerInfoEntity) o;
         return Objects.equals(id, that.id) &&
                 Objects.equals(name, that.name) &&
                 Objects.equals(sex, that.sex) &&
