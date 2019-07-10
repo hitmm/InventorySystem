@@ -5,3 +5,7 @@
     display: block;
     background-size: 150px auto;
 }
+
+.headtitle{
+    text-align: right;
+}
